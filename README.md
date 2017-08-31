@@ -2,4 +2,4 @@
 
 ### Install in Google Chrome
 
-Unpack dict folder. 
+Unpack dist folder. 
