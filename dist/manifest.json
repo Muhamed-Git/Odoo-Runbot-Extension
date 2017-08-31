@@ -1,0 +1,21 @@
+{
+    "name": "React Odoo Runbot Live",
+    "version": "0.1",
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "description": "Login in your favourite site in just one click",
+
+    "chrome_url_overrides" : {
+      "newtab": "tab.html"
+    },
+
+    "permissions": [
+        "cookies",
+        "http://*/*",
+        "https://*/*",
+        "tabs",
+        "storage",
+        "<all_urls>",
+        "activeTab"
+    ]
+}
