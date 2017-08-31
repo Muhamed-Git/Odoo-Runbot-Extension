@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ODOO Runbot</title>
+  <link type="text/css" rel="stylesheet" href="lib/materialize/css/materialize.css" />
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
+  <link href="static/css/tab.css" rel="stylesheet">
+  <link href="lib/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">odoo runbot</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <!-- <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li> -->
+      </ul>
+    </div>
+  </nav>
+
+
+
+  <div id="logModel" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <table id="logTable"></table>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    </div>
+  </div>
+
+  <div class="fixed-action-btn horizontal actionbutton">
+    <a class="btn-floating btn-large parent">
+      <i class="fa fa-bars"></i>
+    </a>
+    <ul class="child">
+      <li><a class="btn-floating waves-effect waves-light modal-trigger" href="#addBranchModel"><i class="fa fa-plus"></i></a></li>
+    </ul>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="addBranchModel" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4><i class="fa fa-github" aria-hidden="true"></i> Add Branch</h4>
+      <div class="row">
+        <div class="input-field col s12">
+          <select id="selectedBranch">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="odoocommunity">Odoo Community</option>
+            <option value="odoodev">Odoo Dev</option>
+            <option value="odooenterprise">Odoo Enterprise</option>
+            <option value="entdev">Enterprise Dev</option>
+          </select>
+          <label>Select Branch</label>
+        </div>
+        <div class="input-field col s12">
+          <input placeholder="Runbot URL" id="runbotUrl" type="text" class="validate">
+          <label for="runbotUrl">URL</label>
+        </div>
+        <div class="input-field col s12">
+          <input placeholder="Branch Name" id="branchname" type="text" class="validate">
+          <label for="branchname">Name</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span class="loading hide modal-action"><i class="fa fa-spinner fa-spin fa-fw"></i> Loading</span>
+      <a href="#!" class="modal-action addBranchBtn waves-effect waves-green btn-flat">Add</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+
+
+  <div class="row cardContainer"></div>
+
+  <script src="lib/javascript/jquery-3.1.1.js"></script>
+  <script src="lib/javascript/underscore-min.js"></script>
+  <script src="lib/materialize/js/materialize.js"></script>
+  <script src="lib/javascript/handlebars-v4.0.10.js"></script>
+  <script id="entry-template" type="text/x-handlebars-template">
+       {{#each this.tdata}}
+       <div class="col s3">
+         <div class="card">
+           <div class="card-image waves-effect waves-block waves-light">
+             <div class="statusBar {{this.current.statusClass}}"></div>
+             <div class="state">
+                 <div class="statusTag {{this.current.statusClass}}">{{this.current.status}}</div>
+                 <div class="errorStatus">
+                     <div class="error logDetails" data-type="danger" data-link="{{this.current.log}}">
+                       <div class="tital"><i class="fa fa-times"></i>Errors</div>
+                       <div class="numbers">{{this.current.logData.data_list.danger.count}}</div>
+                     </div>
+                     <div class="warning logDetails" data-type="warning" data-link="{{this.current.log}}">
+                       <div class="tital"><i class="fa fa-exclamation-triangle"></i>Warnings</div>
+                       <div class="numbers">{{this.current.logData.data_list.warning.count}}</div>
+                     </div>
+                 </div>
+             </div>
+             <div class="branchButtons">
+               <a class="waves-effect waves-teal btn-flat" href="{{this.current.runbotLink}}"><i class="fa fa-sign-in"></i></a>
+               <a class="waves-effect waves-teal btn-flat" href="{{this.current.log}}"><i class="fa fa-file-text-o"></i></a>
+               <a class="waves-effect waves-teal btn-flat" href="{{this.current.commit}}"><i class="fa fa-github"></i></a>
+               <a class="waves-effect waves-teal btn-flat" href="{{this.current.compare}}"><i class="fa fa-code"></i></a>
+             </div>
+             <div class="branchType">
+               {{this.branchTag}}
+             </div>
+           </div>
+           <div class="card-content">
+             <span class="card-title activator grey-text text-darken-4">
+               <span class="branchName">{{this.branchName}}</span>
+               <i class="fa fa-ellipsis-v right"></i>
+             </span>
+             <div>
+               <a href="{{this.branchUrl}}">runbot link</a>
+               <div class="refreshBranch right" data-key={{this.key}}><i class="fa fa-refresh fa-fw"></i></div>
+             </div>
+           </div>
+           <div class="card-reveal">
+             <span class="card-title grey-text text-darken-4"><span class="branchName">Branches</span><i class="fa fa-times right close"></i></span>
+             <div>
+                  {{#each this.branches}}
+                    <div class="otherBranch">
+                      <div class="sideBorder {{this.statusClass}}"></div>
+                      <div class="card">
+                        <div class="card-content">
+                            <span class="{{this.statusClass}}">{{this.status}}</span>
+                            <div class="actionButton">
+                              <a href="{{this.commit}}"><i class="fa fa-github"></i></a>
+                              <a href="{{this.log}}"><i class="fa fa-file-text-o"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <span class="danger logDetails" data-type="danger" data-link="{{this.log}}"><i class="fa fa-times"></i>{{this.logData.data_list.danger.count}}</span>
+                            <span class="warning logDetails" data-type="warning" data-link="{{this.log}}"><i class="fa fa-exclamation-triangle"></i>{{this.logData.data_list.warning.count}}</span>
+                        </div>
+                      </div>
+                    </div>
+                   {{/each}}
+             </div>
+           </div>
+         </div>
+       </div>
+        {{/each}}
+  </script>
+
+  <script src="static/js/tab.js"></script>
+</body>
+
+</html>

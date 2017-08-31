@@ -1,0 +1,243 @@
+// out: ../css/tab.css, compress: true
+@import "base.less";
+
+.logDetails {
+  cursor: pointer;
+}
+
+#logModel {
+  max-height: 80%;
+  width: 90%;
+  table.danger {
+     td {
+       border: 1px solid @status-red;
+     }
+  }
+  table.warning {
+    td {
+      border: 1px solid @status-yellow;
+    }
+  }
+  .danger{
+      background-color: lighten(@status-red,40%);
+  }
+
+  .warning{
+      background-color: lighten(@status-yellow,40%);
+  }
+}
+
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+
+nav {
+  background-color: @base-color;
+}
+
+.actionbutton {
+  .parent {
+    background-color: @base-color;
+  }
+
+  .child {
+    a {
+      background-color: @odoo-primary;
+    }
+  }
+}
+
+.cardContainer {
+  margin: 25px;
+
+  .danger {
+    background-color: @status-red;
+  }
+
+  .warning {
+    background-color: @status-yellow;
+  }
+
+  .success {
+    background-color: @status-green;
+  }
+
+  .killed , .info , .default{
+    background-color: @odoo-gray;
+  }
+
+  .card-image {
+    .btn-flat {
+      color: #fff;
+      padding-left: 26px;
+      padding-right: 26px;
+    }
+
+    .branchButtons {
+      background-color: @odoo-website;
+    }
+
+    .state {
+      height: 120px;
+
+      .disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      .errorStatus {
+        padding-top: 5px;
+        width: 100%;
+        height: 60%;
+        display: inline-flex;
+        text-align: center;
+
+        .error {
+          width: 50%;
+          color: @status-red;
+        }
+
+        .warning {
+          width: 50%;
+          color: @status-yellow;
+        }
+
+        .tital {
+          font-size: 15px;
+
+          .fa {
+            padding-right: 5px;
+          }
+        }
+
+        .numbers {
+          font-size: 30px;
+        }
+      }
+
+      .danger {
+        color: @status-red;
+        background-color: #fff;
+      }
+      .success {
+        color: @status-green;
+        background-color: #fff;
+      }
+      .warning {
+        background-color: #fff;
+        color: @status-yellow;
+      }
+      .killed , .info , .default {
+        background-color: #fff;
+        color:@odoo-gray;
+      }
+    }
+
+    .statusBar {
+      width: 100%;
+      height: 10px;
+    }
+
+    .statusTag {
+      width: 100%;
+      font-size: 30px;
+      text-align: center;
+      border-bottom: 1px #e2e2e2 solid;
+    }
+
+    .branchType {
+      background-color: @base-color;
+      color: #fff;
+      text-align: center;
+    }
+  }
+
+  .card-content {
+    padding: 15px !important;
+    min-height: 118px;
+    .card-title {
+      font-size: 16px;
+    }
+    .refreshBranch {
+        font-size: 15px;
+    }
+  }
+
+  .card-reveal {
+    padding: 0px;
+    .branchName {
+       font-size: 16px;
+       padding-left: 7px;
+    }
+    .card-title {
+      .close {
+        padding-top: 10px;
+        padding-right: 10px;
+        font-size: 18px;
+      }
+    }
+    .otherBranch {
+      display: inline-flex;
+      width: 100%;
+      .sideBorder {
+        width: 5px;
+      }
+      .card {
+        margin: 0;
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid #ececec;
+        .card-content {
+          padding: 5px 5px 5px 10px !important;
+          font-size: 20px;
+          .actionButton {
+             float: right;
+              a {
+                padding-left: 5px;
+                padding-right: 5px;
+                font-size: 17px;
+                color: @status-gray !important;
+              }
+          }
+        }
+        .card-action {
+          padding: 5px 5px 5px 10px !important;
+          font-size: 15px;
+          .fa {
+            padding-right: 5px;
+          }
+          span {
+            padding-right: 10px;
+          }
+        }
+        .danger {
+          color: @status-red;
+          background-color: #fff;
+        }
+        .success {
+          color: @status-green;
+          background-color: #fff;
+        }
+        .warning {
+          background-color: #fff;
+          color: @status-yellow;
+        }
+        .killed , .info {
+          background-color: #fff;
+          color:@odoo-gray;
+        }
+      }
+    }
+  }
+}
+
+#addBranchModel {
+  .loading {
+    font-size: 17px;
+    padding-right: 25px;
+    .fa {
+        margin-right: 10px;
+    }
+  }
+}
