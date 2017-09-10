@@ -1,12 +1,5 @@
 import constants from '../Constants.js'
 
-const filterdata = (action) => {
-  return {
-    data: action.data,
-    id: action.branchName+":"+action.branchType,
-  }
-}
-
 const Branches = (state = [] , action) => {
   let rem = null;
   switch (action.type) {
@@ -14,7 +7,7 @@ const Branches = (state = [] , action) => {
       rem = action.data;
       break;
     case constants.ADD_BRANCH:
-      rem = [...state, filterdata(action)]
+      rem = [...state, action.data]
       break;
     default:
       return state;

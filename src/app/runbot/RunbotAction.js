@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import { addData } from '../actions'
 import appData from '../data/AppData.js'
 import _ from 'underscore'
+import { fetchData } from './RunbotScrapper.js'
+import model from '../model/DBA.js'
 
 class RunbotAction extends React.Component {
 
   constructor(props) {
       super(props);
       this.state = {
-        runbotLink: ''
+        runbotLink: '',
+        loading: false
       }
   }
 
@@ -25,11 +28,18 @@ class RunbotAction extends React.Component {
      window.$('#selectedBranch').on('change',function(){
          self.selectBranchOnChange(window.$('#selectedBranch').val());
      });
-
    }
 
    onAddClick() {
-     this.props.addData('from adder');
+     this.setState({loading: true});
+     var self = this;
+     fetchData(appData.branchInfo.entdev,'master-website-form-builder-chv',(data)=>{
+       model.set(data);
+       self.setState({loading: false});
+     },(error) => {
+       console.log(error);
+       self.setState({loading: false});
+     });
    }
 
    selectBranchOnChange(val) {
@@ -39,6 +49,11 @@ class RunbotAction extends React.Component {
    }
 
    render() {
+     function isLoading(state) {
+        if(state.loading) {
+          return (<span className="loading modal-action"><i className="fa fa-spinner fa-spin fa-fw"></i> Loading</span>)
+        }
+     }
       return (
          <div>
              <div id="addBranchModel" className="modal modal-fixed-footer">
@@ -67,7 +82,9 @@ class RunbotAction extends React.Component {
                  </div>
                </div>
                <div className="modal-footer">
-                 <span className="loading hide modal-action"><i className="fa fa-spinner fa-spin fa-fw"></i> Loading</span>
+               {
+                  isLoading(this.state)
+               }
                  <a href="#!" onClick={()=> this.onAddClick()} className="modal-action addBranchBtn waves-effect waves-green btn-flat">Add</a>
                  <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                </div>

@@ -9,6 +9,8 @@ const model = {
         chrome.storage.sync.set(temp, function() {
 
         });
+      } else {
+        console.log("model : " , data);
       }
   },
   get: (key,store) => {
