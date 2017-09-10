@@ -1,7 +1,7 @@
 import React from 'react'
 import appData from '../data/AppData.js'
 import _ from 'underscore'
-import { retriveLogElement } from './RunbotScrapper.js'
+import { retriveLogElement,fetchData } from './RunbotScrapper.js'
 
 class BranchCard extends React.Component {
 
@@ -10,7 +10,10 @@ class BranchCard extends React.Component {
       this.state = {
         cardData: this.props.data,
         current: _.filter(this.props.data.branches,function(b){return b.order===1})[0],
+        isRefresh: false
       };
+
+      this.refreshBranchClick = this.refreshBranchClick.bind(this);
   }
 
   componentDidMount() {
@@ -21,12 +24,23 @@ class BranchCard extends React.Component {
     var link = event.currentTarget.dataset.link;
     var type = event.currentTarget.dataset.type;
     retriveLogElement(link,type,(tr) => {
-      debugger
       window.$('#logTable').empty();
       window.$('#logTable').attr('class',type);
       window.$('#logTable').append(tr);
       window.$('#logModel').modal('open');
     })
+  }
+
+  refreshBranchClick() {
+      this.setState({isRefresh: true});
+      var self = this;
+      fetchData(appData.branchInfo[this.state.cardData.branchType],this.state.cardData.branchName,(data)=>{
+          self.setState({
+            cardData:data,
+            current: _.filter(data.branches,function(b){return b.order===1})[0], 
+            isRefresh: false
+          })
+      })
   }
 
  render() {
@@ -73,7 +87,11 @@ class BranchCard extends React.Component {
               </span>
               <div>
                 <a href={this.state.cardData.branchUrl}>runbot link</a>
-                <div className="refreshBranch right" data-key={this.state.cardData.key}><i className="fa fa-refresh fa-fw"></i></div>
+                <div className="refreshBranch right" onClick={this.refreshBranchClick} data-key={this.state.cardData.key}>
+                  {
+                    this.state.isRefresh ? <i className="fa fa-refresh fa-spin fa-fw"></i> : <i className="fa fa-refresh fa-fw"></i>
+                  }
+                </div>
               </div>
             </div>
             <div className="card-reveal">
