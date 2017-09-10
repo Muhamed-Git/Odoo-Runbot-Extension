@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { addData } from '../actions'
+import { addBranch } from '../actions'
 import appData from '../data/AppData.js'
 import _ from 'underscore'
 import { fetchData } from './RunbotScrapper.js'
@@ -34,7 +34,10 @@ class RunbotAction extends React.Component {
      this.setState({loading: true});
      var self = this;
      fetchData(appData.branchInfo.entdev,'master-website-form-builder-chv',(data)=>{
-       model.set(data);
+       model.set(data,(d)=>{
+         self.props.addBranch(d);
+         window.$('#addBranchModel').modal('close');
+       });
        self.setState({loading: false});
      },(error) => {
        console.log(error);
@@ -100,5 +103,5 @@ function actionRunbotChild() {
 
 module.exports = {
   actionRunbotChild,
-  RunbotAction: connect(null,{addData})(RunbotAction)
+  RunbotAction: connect(null,{addBranch})(RunbotAction)
 }

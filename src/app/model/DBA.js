@@ -2,15 +2,15 @@ import demoData from '../data/DemoData.js'
 import _ from 'underscore'
 
 const model = {
-  set: (data) => {
+  set: (data,resolve) => {
       if(chrome.storage) {
         var temp = {};
         temp[data.key] = data;
         chrome.storage.sync.set(temp, function() {
-
+            resolve(data);
         });
       } else {
-        console.log("model : " , data);
+        resolve(data);
       }
   },
   get: (key,store) => {

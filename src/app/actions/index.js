@@ -1,6 +1,6 @@
 import constants from '../Constants.js'
 
-export const addData = (data) => {
+export const addBranch = (data) => {
     const action = {
       type: constants.ADD_BRANCH,
       data

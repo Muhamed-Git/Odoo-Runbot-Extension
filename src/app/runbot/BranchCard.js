@@ -1,6 +1,7 @@
 import React from 'react'
 import appData from '../data/AppData.js'
 import _ from 'underscore'
+import { retriveLogElement } from './RunbotScrapper.js'
 
 class BranchCard extends React.Component {
 
@@ -8,24 +9,48 @@ class BranchCard extends React.Component {
       super(props);
       this.state = {
         cardData: this.props.data,
-        current: _.filter(this.props.data.branches,function(b){return b.order===1})[0]
+        current: _.filter(this.props.data.branches,function(b){return b.order===1})[0],
       };
+  }
+
+  componentDidMount() {
+    window.$('#logModel').modal();
+  }
+
+  logDetailsClick(event) {
+    var link = event.currentTarget.dataset.link;
+    var type = event.currentTarget.dataset.type;
+    retriveLogElement(link,type,(tr) => {
+      debugger
+      window.$('#logTable').empty();
+      window.$('#logTable').attr('class',type);
+      window.$('#logTable').append(tr);
+      window.$('#logModel').modal('open');
+    })
   }
 
  render() {
       return (
         <div className="col s3">
+          <div id="logModel" className="modal modal-fixed-footer">
+            <div className="modal-content">
+              <table id="logTable"></table>
+            </div>
+            <div className="modal-footer">
+              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+            </div>
+          </div>
           <div className="card">
             <div className="card-image waves-effect waves-block waves-light">
               <div className={"statusBar " + appData.status[this.state.current.status].class}></div>
               <div className="state">
-                  <div className={"statusTag " + appData.status[this.state.current.status].class}>{appData.status[this.state.current.status].string}</div>
+                  <div className={"statusTag " + appData.status[this.state.current.status].class}>{this.state.current.statusString}</div>
                   <div className="errorStatus">
-                      <div className="error logDetails" data-type="danger" data-link={this.state.current.logURL}>
+                      <div className="error logDetails" onClick={this.logDetailsClick} data-type="danger" data-link={this.state.current.logURL}>
                         <div className="tital"><i className="fa fa-times"></i>Errors</div>
                         <div className="numbers">{this.state.current.logs.error}</div>
                       </div>
-                      <div className="warning logDetails" data-type="warning" data-link={this.state.current.logURL}>
+                      <div className="warning logDetails" onClick={this.logDetailsClick} data-type="warning" data-link={this.state.current.logURL}>
                         <div className="tital"><i className="fa fa-exclamation-triangle"></i>Warnings</div>
                         <div className="numbers">{this.state.current.logs.warning}</div>
                       </div>
@@ -56,20 +81,21 @@ class BranchCard extends React.Component {
               <div>
                 {
                   this.state.cardData.branches.map((branch,key) => {
+                    if(key === 0) return;
                     return(
                       <div className="otherBranch" key={key}>
                         <div className={"sideBorder "+ appData.status[branch.status].class}></div>
                         <div className="card">
                           <div className="card-content">
-                              <span className={appData.status[branch.status].class}>{appData.status[branch.status].string}</span>
+                              <span className={appData.status[branch.status].class}>{branch.statusString}</span>
                               <div className="actionButton">
                                 <a href={branch.commitURL}><i className="fa fa-github"></i></a>
                                 <a href={branch.logURL}><i className="fa fa-file-text-o"></i></a>
                               </div>
                           </div>
                           <div className="card-action">
-                            {/*<span className="danger logDetails" data-type="danger" data-link="{{this.log}}"><i className="fa fa-times"></i>{{this.logData.data_list.danger.count}}</span>
-                            <span className="warning logDetails" data-type="warning" data-link="{{this.log}}"><i className="fa fa-exclamation-triangle"></i>{{this.logData.data_list.warning.count}}</span>*/}
+                            <span className="danger logDetails" onClick={this.logDetailsClick} data-type="danger" data-link={branch.logURL}><i className="fa fa-times"></i>{branch.logs.error}</span>
+                            <span className="warning logDetails" onClick={this.logDetailsClick} data-type="warning" data-link={branch.logURL}><i className="fa fa-exclamation-triangle"></i>{branch.logs.warning}</span>
                           </div>
                         </div>
                       </div>
