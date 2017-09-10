@@ -2,6 +2,7 @@ import React from 'react'
 import appData from '../data/AppData.js'
 import _ from 'underscore'
 import { retriveLogElement,fetchData } from './RunbotScrapper.js'
+import { AppNotification } from '../Notification.js'
 
 class BranchCard extends React.Component {
 
@@ -34,13 +35,16 @@ class BranchCard extends React.Component {
   refreshBranchClick() {
       this.setState({isRefresh: true});
       var self = this;
-      fetchData(appData.branchInfo[this.state.cardData.branchType],this.state.cardData.branchName,(data)=>{
+      fetchData(appData.branchInfo[this.state.cardData.branchType],this.state.cardData.branchName+"sadasdsadasasdsadsa",(data)=>{
           self.setState({
             cardData:data,
-            current: _.filter(data.branches,function(b){return b.order===1})[0], 
+            current: _.filter(data.branches,function(b){return b.order===1})[0],
             isRefresh: false
           })
-      })
+      },(error) => {
+        AppNotification(error);
+        self.setState({isRefresh: false});
+      });
   }
 
  render() {

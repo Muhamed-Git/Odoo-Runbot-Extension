@@ -5,6 +5,7 @@ import appData from '../data/AppData.js'
 import _ from 'underscore'
 import { fetchData } from './RunbotScrapper.js'
 import model from '../model/DBA.js'
+import { AppNotification } from '../Notification.js'
 
 class RunbotAction extends React.Component {
 
@@ -40,7 +41,7 @@ class RunbotAction extends React.Component {
        });
        self.setState({loading: false});
      },(error) => {
-       console.log(error);
+       AppNotification(error);
        self.setState({loading: false});
      });
    }
