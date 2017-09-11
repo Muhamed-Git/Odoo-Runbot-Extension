@@ -14,5 +14,6 @@ var ChromeNotification = function(option) {
   }
 }
 module.exports = {
-  AppNotification
+  AppNotification,
+  ChromeNotification
 }

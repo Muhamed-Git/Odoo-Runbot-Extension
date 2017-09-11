@@ -2,7 +2,7 @@ import React from 'react'
 import appData from '../data/AppData.js'
 import _ from 'underscore'
 import { retriveLogElement,fetchData } from './RunbotScrapper.js'
-import { AppNotification } from '../Notification.js'
+import { AppNotification , ChromeNotification } from '../Notification.js'
 import { connect } from 'react-redux'
 import { branchUpdate , branchDelete } from '../actions'
 import model from '../model/DBA.js'
@@ -26,11 +26,16 @@ class BranchCard extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     var updatedData = nextProps.store.Branches.filter((s) => s.key === this.state.cardData.key)[0];
+    var currentData = _.filter(updatedData.branches,function(b){return b.order===1})[0];
     this.setState({
       cardData : updatedData,
-      current: _.filter(updatedData.branches,function(b){return b.order===1})[0],
+      current: currentData,
       isRefresh: false
     })
+    ChromeNotification({
+      tital: currentData.statusString,
+      message: updatedData.branchName + " (" + appData.branchInfo[updatedData.branchType].string + ")" + "\n" + "Error : " + currentData.logs.error + "  Warning : " + currentData.logs.warning
+    });
   }
 
   setTimeInterval() {
