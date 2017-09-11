@@ -4,8 +4,9 @@ import _ from 'underscore'
 import { retriveLogElement,fetchData } from './RunbotScrapper.js'
 import { AppNotification } from '../Notification.js'
 import { connect } from 'react-redux'
-import { branchUpdate } from '../actions'
+import { branchUpdate , branchDelete } from '../actions'
 import model from '../model/DBA.js'
+import classnames from 'classnames'
 
 class BranchCard extends React.Component {
 
@@ -19,6 +20,7 @@ class BranchCard extends React.Component {
 
       this.refreshBranchClick = this.refreshBranchClick.bind(this);
       this.setTimeInterval = this.setTimeInterval.bind(this);
+      this.deleteBranchClick = this.deleteBranchClick.bind(this);
       this.setTimeInterval()
   }
 
@@ -71,6 +73,14 @@ class BranchCard extends React.Component {
       });
   }
 
+  deleteBranchClick() {
+      var self = this;
+      model.delete(this.state.cardData,(d)=>{
+        AppNotification(this.state.cardData.branchName + " is deleted")
+        self.props.branchDelete(this.state.cardData);
+      });
+  }
+
  render() {
       return (
         <div className="col s3">
@@ -115,10 +125,11 @@ class BranchCard extends React.Component {
               </span>
               <div>
                 <a href={this.state.cardData.branchUrl}>runbot link</a>
-                <div className="refreshBranch right" onClick={this.refreshBranchClick} data-key={this.state.cardData.key}>
-                  {
-                    this.state.isRefresh ? <i className="fa fa-refresh fa-spin fa-fw"></i> : <i className="fa fa-refresh fa-fw"></i>
-                  }
+                <div className="deleteBranch right" onClick={this.deleteBranchClick}>
+                    <i className="fa fa-trash"></i>
+                </div>
+                <div className="refreshBranch right" onClick={this.refreshBranchClick}>
+                    <i className={"fa fa-refresh fa-fw " + classnames({'fa-spin':this.state.isRefresh})}></i>
                 </div>
               </div>
             </div>
@@ -160,4 +171,4 @@ function mapStateToProps(store) {
     return {store}
 }
 
-export default connect(mapStateToProps,{branchUpdate})(BranchCard)
+export default connect(mapStateToProps,{branchUpdate,branchDelete})(BranchCard)

@@ -31,10 +31,18 @@ const model = {
       resolve(data);
     }
   },
+  delete: (data,resolve) => {
+    if(chrome.storage) {
+      chrome.storage.sync.remove(data.key, function() {
+          resolve(data);
+      });
+    } else {
+      resolve(data);
+    }
+  },
   getAll: (resolve) => {
     if(chrome.storage) {
       chrome.storage.sync.get(null, function(data) {
-        console.log(data);
          if(data) {
            resolve(_.values(data));
          } else {

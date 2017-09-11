@@ -16,6 +16,14 @@ export const branchUpdate = (data) => {
     return action;
 }
 
+export const branchDelete = (data) => {
+    const action = {
+      type: constants.DELETE_BRANCH,
+      data
+    }
+    return action;
+}
+
 export const initState = (data) => {
     const action = {
       type: constants.INIT_BRANCH_STATE,

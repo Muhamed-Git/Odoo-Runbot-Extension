@@ -37,7 +37,6 @@ class RunbotAction extends React.Component {
    }
 
    onAddClick() {
-     debugger;
      if(!this.state.runbotLink.length && !this.state.branchName.length) {
        AppNotification('Fill All Data');
        return

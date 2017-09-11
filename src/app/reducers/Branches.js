@@ -9,6 +9,9 @@ const Branches = (state = [] , action) => {
     case constants.UPDATE_BRANCH:
       rem = state.map((s) => { return s.key === action.data.key ? action.data : s })
       break;
+    case constants.DELETE_BRANCH:
+      rem = state.filter((s) => { return s.key !== action.data.key })
+      break;
     case constants.ADD_BRANCH:
       rem = [...state, action.data]
       break;
