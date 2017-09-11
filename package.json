@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "classnames": "^2.2.5",
     "css-loader": "^0.28.6",
     "materialize-css": "^0.100.2",
     "react": "^15.6.1",

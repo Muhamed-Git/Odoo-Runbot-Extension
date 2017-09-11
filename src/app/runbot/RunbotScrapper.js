@@ -6,6 +6,10 @@ var fetchData = function(branch,branchName,successCallback,errorCallBack) {
     ajexRequest(url,(htmlData)=>{
         var data = extractData(htmlData,{branchName,branch,url});
         if(data) {
+          data = Object.assign(data,{
+            autoRefresh: false,
+            refreshInterval: 0,
+          });
           fetchLogData(data,successCallback)
         } else {
           errorCallBack('Branch Not Found')
@@ -40,7 +44,7 @@ var extractDataFromRow = function(td,option) {
   _.each(td, function(t, index) {
     t = $(t);
     if (index === 0) {
-      data['key'] = option.branchName+":"+option.branch.key;
+      data['key'] = option.branch.key+"+"+option.branchName;
       data['branchName'] = t.find('b').html();
       data['branchType'] = option.branch.key;
       data['branchUrl'] = option.url;

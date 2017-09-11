@@ -20,9 +20,21 @@ const model = {
     }
     return {};
   },
+  update: (data,resolve) => {
+    if(chrome.storage) {
+      var temp = {};
+      temp[data.key] = data;
+      chrome.storage.sync.set(temp, function() {
+          resolve(data);
+      });
+    } else {
+      resolve(data);
+    }
+  },
   getAll: (resolve) => {
     if(chrome.storage) {
       chrome.storage.sync.get(null, function(data) {
+        console.log(data);
          if(data) {
            resolve(_.values(data));
          } else {

@@ -6,6 +6,7 @@ import _ from 'underscore'
 import { fetchData } from './RunbotScrapper.js'
 import model from '../model/DBA.js'
 import { AppNotification } from '../Notification.js'
+import classnames from 'classnames'
 
 class RunbotAction extends React.Component {
 
@@ -13,8 +14,12 @@ class RunbotAction extends React.Component {
       super(props);
       this.state = {
         runbotLink: '',
-        loading: false
+        loading: false,
+        branchName: '',
+        branchType: '',
       }
+
+      this.handleChange = this.handleChange.bind(this);
   }
 
    componentDidMount() {
@@ -32,9 +37,14 @@ class RunbotAction extends React.Component {
    }
 
    onAddClick() {
+     debugger;
+     if(!this.state.runbotLink.length && !this.state.branchName.length) {
+       AppNotification('Fill All Data');
+       return
+     }
      this.setState({loading: true});
      var self = this;
-     fetchData(appData.branchInfo.entdev,'master-website-form-builder-chv',(data)=>{
+     fetchData(appData.branchInfo[this.state.branchType],this.state.branchName,(data)=>{
        model.set(data,(d)=>{
          self.props.addBranch(d);
          window.$('#addBranchModel').modal('close');
@@ -46,18 +56,21 @@ class RunbotAction extends React.Component {
      });
    }
 
+   handleChange(event) {
+      var key = event.target.dataset.key;
+      var temp = {};
+      temp[key] = event.target.value;
+      this.setState(temp);
+   }
+
    selectBranchOnChange(val) {
      this.setState({
-       runbotLink: appData.branchInfo[val].url
+       runbotLink: appData.branchInfo[val].url,
+       branchType: val
      })
    }
 
    render() {
-     function isLoading(state) {
-        if(state.loading) {
-          return (<span className="loading modal-action"><i className="fa fa-spinner fa-spin fa-fw"></i> Loading</span>)
-        }
-     }
       return (
          <div>
              <div id="addBranchModel" className="modal modal-fixed-footer">
@@ -66,7 +79,7 @@ class RunbotAction extends React.Component {
                  <div className="row">
                    <div className="input-field col s12">
                      <select id="selectedBranch">
-                       {/*<option value="" disabled selected>Choose your option</option>*/}
+                       <option value="" disabled selected>Choose your option</option>
                        {
                          _.keys(appData.branchInfo).map((branch,index)=>{
                             return(<option value={branch} key={index}>{appData.branchInfo[branch].string}</option>)
@@ -76,20 +89,18 @@ class RunbotAction extends React.Component {
                      <label>Select Branch</label>
                    </div>
                    <div className="input-field col s12">
-                     <input placeholder="Runbot URL" id="runbotUrl" type="text" className="validate" value={this.state.runbotLink}/>
+                     <input placeholder="Runbot URL" data-key="runbotLink" type="text" className="validate" value={this.state.runbotLink} onChange={this.handleChange} />
                      <label>URL</label>
                    </div>
                    <div className="input-field col s12">
-                     <input placeholder="Branch Name" id="branchname" type="text" className="validate"/>
+                     <input placeholder="Branch Name" data-key="branchName" value={this.state.branchname} onChange={this.handleChange} type="text" className="validate"/>
                      <label>Name</label>
                    </div>
                  </div>
                </div>
                <div className="modal-footer">
-               {
-                  isLoading(this.state)
-               }
-                 <a href="#!" onClick={()=> this.onAddClick()} className="modal-action addBranchBtn waves-effect waves-green btn-flat">Add</a>
+                 <span className={"loading modal-action "+ classnames({'hide':!this.state.loading})}><i className="fa fa-spinner fa-spin fa-fw"></i> Loading</span>
+                 <a href="#!" onClick={()=> this.onAddClick()} className={"modal-action addBranchBtn waves-effect waves-green btn-flat " + classnames({'disabled' : this.state.loading})}>Add</a>
                  <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                </div>
              </div>

@@ -6,6 +6,9 @@ const Branches = (state = [] , action) => {
     case constants.INIT_BRANCH_STATE:
       rem = action.data;
       break;
+    case constants.UPDATE_BRANCH:
+      rem = state.map((s) => { return s.key === action.data.key ? action.data : s })
+      break;
     case constants.ADD_BRANCH:
       rem = [...state, action.data]
       break;

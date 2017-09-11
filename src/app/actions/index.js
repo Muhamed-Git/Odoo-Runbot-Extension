@@ -8,6 +8,14 @@ export const addBranch = (data) => {
     return action;
 }
 
+export const branchUpdate = (data) => {
+    const action = {
+      type: constants.UPDATE_BRANCH,
+      data
+    }
+    return action;
+}
+
 export const initState = (data) => {
     const action = {
       type: constants.INIT_BRANCH_STATE,

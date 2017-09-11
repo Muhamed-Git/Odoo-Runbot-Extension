@@ -6,6 +6,8 @@
 //     branchUrl: ,
 //     gitBranchURL: ,
 //     gitCompareURL: ,
+//     autoRefresh: ,
+//     refreshInterval: ,
 //     branches: [{
 //       commitURL: ,
 //       logURL: ,
@@ -27,6 +29,8 @@ const demoData = [{
     branchUrl: "http://runbot.odoo.com/runbot/repo/git-github-com-odoo-dev-enterprise-8?search=master-website-sign-qunit-test-case-dep",
     gitBranchURL: "https://github.com/odoo-dev/enterprise/tree/master-website-sign-qunit-test-case-dep",
     gitCompareURL: "https://github.com/odoo-dev/enterprise/compare/master-website-sign-qunit-test-case-dep",
+    autoRefresh: false,
+    refreshInterval: 10 * 1000,
     branches: [{
       commitURL: "https://github.com/odoo-dev/enterprise/commit/e7ba3451651b9fcc0d0681fa7b514045f7061a30",
       logURL: "http://runbot.odoo.com/runbot/build/262750",

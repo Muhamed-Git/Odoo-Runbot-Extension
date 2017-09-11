@@ -3,6 +3,9 @@ import appData from '../data/AppData.js'
 import _ from 'underscore'
 import { retriveLogElement,fetchData } from './RunbotScrapper.js'
 import { AppNotification } from '../Notification.js'
+import { connect } from 'react-redux'
+import { branchUpdate } from '../actions'
+import model from '../model/DBA.js'
 
 class BranchCard extends React.Component {
 
@@ -15,6 +18,29 @@ class BranchCard extends React.Component {
       };
 
       this.refreshBranchClick = this.refreshBranchClick.bind(this);
+      this.setTimeInterval = this.setTimeInterval.bind(this);
+      this.setTimeInterval()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    var updatedData = nextProps.store.Branches.filter((s) => s.key === this.state.cardData.key)[0];
+    this.setState({
+      cardData : updatedData,
+      current: _.filter(updatedData.branches,function(b){return b.order===1})[0],
+      isRefresh: false
+    })
+  }
+
+  setTimeInterval() {
+    var self = this;
+    if (interval) {
+      clearInterval(interval);
+    }
+    if(this.state.cardData.autoRefresh) {
+      var interval = setInterval(function(){
+        self.refreshBranchClick();
+      },this.state.cardData.refreshInterval)
+    }
   }
 
   componentDidMount() {
@@ -35,12 +61,10 @@ class BranchCard extends React.Component {
   refreshBranchClick() {
       this.setState({isRefresh: true});
       var self = this;
-      fetchData(appData.branchInfo[this.state.cardData.branchType],this.state.cardData.branchName+"sadasdsadasasdsadsa",(data)=>{
-          self.setState({
-            cardData:data,
-            current: _.filter(data.branches,function(b){return b.order===1})[0],
-            isRefresh: false
-          })
+      fetchData(appData.branchInfo[this.state.cardData.branchType],this.state.cardData.branchName,(data)=>{
+          model.update(data,(d)=>{
+            self.props.branchUpdate(data);
+          });
       },(error) => {
         AppNotification(error);
         self.setState({isRefresh: false});
@@ -136,4 +160,4 @@ function mapStateToProps(store) {
     return {store}
 }
 
-export default BranchCard;
+export default connect(mapStateToProps,{branchUpdate})(BranchCard)
