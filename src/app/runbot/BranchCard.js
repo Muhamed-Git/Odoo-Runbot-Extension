@@ -15,12 +15,14 @@ class BranchCard extends React.Component {
       this.state = {
         cardData: this.props.data,
         current: _.filter(this.props.data.branches,function(b){return b.order===1})[0],
-        isRefresh: false
+        isRefresh: false,
+        autoRefresh: this.props.data.autoRefresh,
       };
 
       this.refreshBranchClick = this.refreshBranchClick.bind(this);
       this.setTimeInterval = this.setTimeInterval.bind(this);
       this.deleteBranchClick = this.deleteBranchClick.bind(this);
+      this.autoRefreshBranchClick = this.autoRefreshBranchClick.bind(this);
       this.setTimeInterval()
   }
 
@@ -32,19 +34,21 @@ class BranchCard extends React.Component {
       current: currentData,
       isRefresh: false
     })
-    ChromeNotification({
-      tital: currentData.statusString,
-      message: updatedData.branchName + " (" + appData.branchInfo[updatedData.branchType].string + ")" + "\n" + "Error : " + currentData.logs.error + "  Warning : " + currentData.logs.warning
-    });
+    if(this.state.autoRefresh) {
+      ChromeNotification({
+        tital: currentData.statusString,
+        message: updatedData.branchName + " (" + appData.branchInfo[updatedData.branchType].string + ")" + "\n" + "Error : " + currentData.logs.error + "  Warning : " + currentData.logs.warning
+      });
+    }
   }
 
   setTimeInterval() {
     var self = this;
-    if (interval) {
-      clearInterval(interval);
+    if (this.interval) {
+      clearInterval(this.interval);
     }
     if(this.state.cardData.autoRefresh) {
-      var interval = setInterval(function(){
+      this.interval = setInterval(function(){
         self.refreshBranchClick();
       },this.state.cardData.refreshInterval)
     }
@@ -76,6 +80,15 @@ class BranchCard extends React.Component {
         AppNotification(error);
         self.setState({isRefresh: false});
       });
+  }
+
+  autoRefreshBranchClick() {
+    // UPDATE AUTO REFRESH VARIABLE
+    var autoRefresh = !this.state.autoRefresh;
+    this.setState({autoRefresh});
+    this.state.cardData.autoRefresh = autoRefresh;
+    this.state.cardData.refreshInterval = 300000;
+    this.setTimeInterval();
   }
 
   deleteBranchClick() {
@@ -130,6 +143,12 @@ class BranchCard extends React.Component {
               </span>
               <div>
                 <a href={this.state.cardData.branchUrl}>runbot link</a>
+                <div className="autoRefreshBranch right" onClick={this.autoRefreshBranchClick}>
+                    <p>
+                      <input type="checkbox" id="test5" checked={classnames({'checked':this.state.autoRefresh})}/>
+                      <label>Auto</label>
+                    </p>
+                </div>
                 <div className="deleteBranch right" onClick={this.deleteBranchClick}>
                     <i className="fa fa-trash"></i>
                 </div>

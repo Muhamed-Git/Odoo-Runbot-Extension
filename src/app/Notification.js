@@ -9,7 +9,7 @@ var ChromeNotification = function(option) {
     message: option.message,
     iconUrl: "/static/img/odooicon.png"
   }
-  if(chrome) {
+  if(chrome.notifications) {
     chrome.notifications.create(option.id, opt);
   }
 }
