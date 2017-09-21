@@ -1,5 +1,6 @@
 import _ from 'underscore'
 import appData from '../data/AppData.js'
+import moment from 'moment'
 
 var fetchData = function(branch,branchName,successCallback,errorCallBack) {
     var url = branch.url + "?search=" + branchName;
@@ -49,6 +50,7 @@ var extractDataFromRow = function(td,option) {
       data['branchType'] = option.branch.key;
       data['branchUrl'] = option.url;
       data['gitBranchURL'] = t.find('a').eq(0).attr('href');
+      data['lastUpdate'] = moment.utc().format('ddd MMM DD YYYY HH:mm:ss z');
       data['branches'] = [];
     } else {
       var btns = t.find('.btn-group');

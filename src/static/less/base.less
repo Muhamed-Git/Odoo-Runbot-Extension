@@ -15,3 +15,62 @@
 @status-yellow: #F9A825;
 @status-red: #c62828;
 @status-gray: #424242;
+
+
+.fontColorStatus() {
+  .danger {
+    color: @status-red;
+  }
+
+  .warning {
+    color: @status-yellow;
+  }
+
+  .success {
+    color: @status-green;
+  }
+
+  .killed , .info , .default{
+    color: @odoo-gray;
+  }
+
+  .action {
+    color: @odoo-primary;
+  }
+}
+
+.backgroundColorStatus() {
+  .danger {
+    background-color: @status-red;
+  }
+
+  .warning {
+    background-color: @status-yellow;
+  }
+
+  .success {
+    background-color: @status-green;
+  }
+
+  .killed , .info , .default{
+    background-color: @odoo-gray;
+  }
+}
+
+.borderColorStatus() {
+  .danger {
+    border-left: 3px solid @status-red;
+  }
+
+  .warning {
+    border-left: 3px solid @status-yellow;
+  }
+
+  .success {
+    border-left: 3px solid @status-green;
+  }
+
+  .killed , .info , .default{
+    border-left: 3px solid @odoo-gray;
+  }
+}

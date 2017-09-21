@@ -1,0 +1,181 @@
+.batchCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  bottom: 0;
+  right: auto;
+  width: 3px;
+}
+.success::after {
+  background-color: #2E7D32;
+}
+.danger::after {
+  background-color: #c62828;
+}
+.warning::after {
+  background-color: #F9A825;
+}
+.killed::after,
+.info::after,
+.default::after {
+  background-color: #424242;
+}
+.batchCard .card-content {
+  padding: 0;
+}
+.batchCard .card-content .statusBar {
+  height: 22px;
+  border-bottom: 1px solid #f1f1f1;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.batchCard .card-content .statusBar .danger {
+  color: #c62828;
+}
+.batchCard .card-content .statusBar .warning {
+  color: #F9A825;
+}
+.batchCard .card-content .statusBar .success {
+  color: #2E7D32;
+}
+.batchCard .card-content .statusBar .killed,
+.batchCard .card-content .statusBar .info,
+.batchCard .card-content .statusBar .default {
+  color: #8F8F8F;
+}
+.batchCard .card-content .statusBar .action {
+  color: #21b799;
+}
+.batchCard .card-content .statusBar .branchType {
+  color: #875a7b;
+}
+.batchCard .card-content .branchNameDiv {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.batchCard .card-content .branchNameDiv .branchName {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+.batchCard .card-content .logDetails {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: -webkit-box;
+  border-bottom: 1px solid #f1f1f1;
+}
+.batchCard .card-content .logDetails div {
+  width: 50%;
+}
+.batchCard .card-content .logDetails .warningLog {
+  color: #F9A825;
+}
+.batchCard .card-content .logDetails .errorLog {
+  color: #c62828;
+}
+.batchCard .card-content .message {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+.batchCard .card-action {
+  padding: 0;
+}
+.batchCard .card-action a {
+  margin-right: 0 !important;
+  width: 15%;
+  color: #21b799 !important;
+}
+.batchCard .card-action .branchCardOption {
+  width: auto !important;
+  overflow: hidden;
+}
+.batchCard .card-action .branchCardOption .divider {
+  min-height: 0 !important;
+}
+.batchCard .card-action .branchCardOption .autoRefreshElement span {
+  padding: 0px;
+  font-size: 13px;
+}
+.batchCard .card-action .branchCardOption .autoRefreshElement .switch .lever {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.batchCard .card-action .branchCardOption .autoRefreshElement #autoRefreshTime {
+  margin-bottom: 5px;
+  width: 40px;
+}
+.batchCard .card-action .branchCardOption a {
+  padding: 0;
+  font-size: 13px;
+}
+.batchCard .card-action .branchCardOption a span {
+  display: inline-flex;
+  width: max-content;
+  padding: 5px;
+}
+.batchCard .card-action .branchCardOption a span i {
+  padding-right: 5px;
+  padding-top: 4px;
+}
+.batchCard .card-action .branchCardOption li {
+  min-height: 20px;
+}
+.batchCard .card-reveal {
+  padding: 0;
+}
+.batchCard .card-reveal .card-title {
+  padding: 4px;
+  font-size: 14px;
+}
+.batchCard .card-reveal .card-title .fa {
+  padding-top: 5px;
+  padding-right: 5px;
+}
+.batchCard .card-reveal .otherBranch .branch {
+  padding-left: 5px;
+  margin-bottom: 5px;
+  padding-right: 10px;
+}
+.batchCard .card-reveal .otherBranch .branch .danger {
+  color: #c62828;
+}
+.batchCard .card-reveal .otherBranch .branch .warning {
+  color: #F9A825;
+}
+.batchCard .card-reveal .otherBranch .branch .success {
+  color: #2E7D32;
+}
+.batchCard .card-reveal .otherBranch .branch .killed,
+.batchCard .card-reveal .otherBranch .branch .info,
+.batchCard .card-reveal .otherBranch .branch .default {
+  color: #8F8F8F;
+}
+.batchCard .card-reveal .otherBranch .branch .action {
+  color: #21b799;
+}
+.batchCard .card-reveal .otherBranch .branch span,
+.batchCard .card-reveal .otherBranch .branch a {
+  border: none;
+}
+.batchCard .card-reveal .otherBranch .branch a {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.batchCard .card-reveal .otherBranch .danger {
+  border-left: 3px solid #c62828;
+}
+.batchCard .card-reveal .otherBranch .warning {
+  border-left: 3px solid #F9A825;
+}
+.batchCard .card-reveal .otherBranch .success {
+  border-left: 3px solid #2E7D32;
+}
+.batchCard .card-reveal .otherBranch .killed,
+.batchCard .card-reveal .otherBranch .info,
+.batchCard .card-reveal .otherBranch .default {
+  border-left: 3px solid #8F8F8F;
+}

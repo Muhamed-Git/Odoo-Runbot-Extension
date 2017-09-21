@@ -1,1 +1,42 @@
-.logDetails{cursor:pointer}#logModel{max-height:80%;width:90%}#logModel table.danger td{border:1px solid #c62828}#logModel table.warning td{border:1px solid #F9A825}#logModel .danger{background-color:#f4c6c6}#logModel .warning{background-color:#fef7ec}.brand-logo{padding-left:10px !important;font-family:'Comfortaa',cursive}nav{background-color:#875a7b}.actionbutton .parent{background-color:#875a7b}.actionbutton .child a{background-color:#21b799}.cardContainer{margin:25px}.cardContainer .danger{background-color:#c62828}.cardContainer .warning{background-color:#F9A825}.cardContainer .success{background-color:#2E7D32}.cardContainer .killed,.cardContainer .info,.cardContainer .default{background-color:#8F8F8F}.cardContainer .card-image .btn-flat{color:#fff;padding-left:26px;padding-right:26px}.cardContainer .card-image .branchButtons{background-color:#5B899E}.cardContainer .card-image .state{height:120px}.cardContainer .card-image .state .disabled{opacity:.4;cursor:not-allowed}.cardContainer .card-image .state .errorStatus{padding-top:5px;width:100%;height:60%;display:inline-flex;text-align:center}.cardContainer .card-image .state .errorStatus .error{width:50%;color:#c62828}.cardContainer .card-image .state .errorStatus .warning{width:50%;color:#F9A825}.cardContainer .card-image .state .errorStatus .tital{font-size:15px}.cardContainer .card-image .state .errorStatus .tital .fa{padding-right:5px}.cardContainer .card-image .state .errorStatus .numbers{font-size:30px}.cardContainer .card-image .state .danger{color:#c62828;background-color:#fff}.cardContainer .card-image .state .success{color:#2E7D32;background-color:#fff}.cardContainer .card-image .state .warning{background-color:#fff;color:#F9A825}.cardContainer .card-image .state .killed,.cardContainer .card-image .state .info,.cardContainer .card-image .state .default{background-color:#fff;color:#8F8F8F}.cardContainer .card-image .statusBar{width:100%;height:10px}.cardContainer .card-image .statusTag{width:100%;font-size:30px;text-align:center;border-bottom:1px #e2e2e2 solid}.cardContainer .card-image .branchType{background-color:#875a7b;color:#fff;text-align:center}.cardContainer .card-content{padding:15px !important;min-height:118px}.cardContainer .card-content .card-title{font-size:16px}.cardContainer .card-content .refreshBranch{font-size:15px}.cardContainer .card-reveal{padding:0}.cardContainer .card-reveal .branchName{font-size:16px;padding-left:7px}.cardContainer .card-reveal .card-title .close{padding-top:10px;padding-right:10px;font-size:18px}.cardContainer .card-reveal .otherBranch{display:inline-flex;width:100%}.cardContainer .card-reveal .otherBranch .sideBorder{width:5px}.cardContainer .card-reveal .otherBranch .card{margin:0;width:100%;box-shadow:none;border:1px solid #ececec}.cardContainer .card-reveal .otherBranch .card .card-content{padding:5px 5px 5px 10px !important;font-size:20px}.cardContainer .card-reveal .otherBranch .card .card-content .actionButton{float:right}.cardContainer .card-reveal .otherBranch .card .card-content .actionButton a{padding-left:5px;padding-right:5px;font-size:17px;color:#424242 !important}.cardContainer .card-reveal .otherBranch .card .card-action{padding:5px 5px 5px 10px !important;font-size:15px}.cardContainer .card-reveal .otherBranch .card .card-action .fa{padding-right:5px}.cardContainer .card-reveal .otherBranch .card .card-action span{padding-right:10px}.cardContainer .card-reveal .otherBranch .card .danger{color:#c62828;background-color:#fff}.cardContainer .card-reveal .otherBranch .card .success{color:#2E7D32;background-color:#fff}.cardContainer .card-reveal .otherBranch .card .warning{background-color:#fff;color:#F9A825}.cardContainer .card-reveal .otherBranch .card .killed,.cardContainer .card-reveal .otherBranch .card .info{background-color:#fff;color:#8F8F8F}#addBranchModel .loading{font-size:17px;padding-right:25px}#addBranchModel .loading .fa{margin-right:10px}
+body{
+  font-size: 100%;
+}
+.logDetails {
+  cursor: pointer;
+}
+#logModel {
+  max-height: 80%;
+  width: 90%;
+}
+#logModel table.danger td {
+  border: 1px solid #c62828;
+}
+#logModel table.warning td {
+  border: 1px solid #F9A825;
+}
+#logModel .danger {
+  background-color: #f4c6c6;
+}
+#logModel .warning {
+  background-color: #fef7ec;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+nav {
+  background-color: #875a7b;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+#addBranchModel .loading {
+  font-size: 17px;
+  padding-right: 25px;
+}
+#addBranchModel .loading .fa {
+  margin-right: 10px;
+}
