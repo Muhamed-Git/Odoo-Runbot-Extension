@@ -51,17 +51,15 @@ var extractDataFromRow = function(td,option) {
       data['gitBranchURL'] = t.find('a').eq(0).attr('href');
       data['branches'] = [];
     } else {
-      var btns = t.find('.btn-group a');
-      var i = btns.eq(0).attr('class') === 'btn btn-primary' ? 0 : -1;
-      var ci = btns.eq(0).attr('class') === 'btn btn-primary' ? 11 : 7;
-      data['gitCompareURL'] = !data['gitCompareURL'] && data['gitCompareURL'] !== '#' ? btns.eq(ci).attr('href') : data['gitCompareURL'];
+      var btns = t.find('.btn-group');
+      data['gitCompareURL'] = !data['gitCompareURL'] && data['gitCompareURL'] !== '#' ? btns.find("a:contains('Compare')").attr('href') : data['gitCompareURL'];
       data['branches'].push({
         order: index,
         statusString: t.attr('class') !== "default" ? appData.status[t.attr('class')].string : appData.status[t.attr('class')].string[t.find('>i').attr("class").split(' ')[2]],
         status: t.attr('class'),
-        runbotLink: btns.eq(i++).attr('href'),
-        logURL: appData.runbotURL + btns.eq(i++).attr('href'),
-        commitURL: btns.eq(i++).attr('href'),
+        runbotLink: btns.find('a.btn.btn-primary .fa-sign-in').parent().attr('href') || "#",
+        logURL: appData.runbotURL + btns.find("a:contains('Logs')").attr('href'),
+        commitURL: btns.find("a:contains('Commit')").attr('href'),
         logs: {
           error: 0,
           warning: 0
