@@ -19,29 +19,34 @@ class BranchCard extends React.Component {
         isRefresh: false,
         autoRefresh: this.props.data.autoRefresh,
         dropDownId: _.uniqueId('branchCardOption'),
+        refreshInterval: this.props.data.refreshInterval / 60000,
       };
 
       this.refreshBranchClick = this.refreshBranchClick.bind(this);
       this.setTimeInterval = this.setTimeInterval.bind(this);
       this.deleteBranchClick = this.deleteBranchClick.bind(this);
       this.autoRefreshBranchClick = this.autoRefreshBranchClick.bind(this);
+      this.autoRefreshULClick = this.autoRefreshULClick.bind(this);
+      this.autoRefreshInputClick = this.autoRefreshInputClick.bind(this);
       this.setTimeInterval()
   }
 
   componentWillReceiveProps(nextProps) {
     var updatedData = nextProps.store.Branches.filter((s) => s.key === this.state.cardData.key)[0];
     var currentData = _.filter(updatedData.branches,function(b){return b.order===1})[0];
-    this.setState({
-      cardData : updatedData,
-      current: currentData,
-      isRefresh: false
-    })
-    if(this.state.autoRefresh) {
+    if(updatedData.autoRefresh && this.state.isRefresh) {
       ChromeNotification({
         tital: currentData.statusString,
         message: updatedData.branchName + " (" + appData.branchInfo[updatedData.branchType].string + ")" + "\n" + "Error : " + currentData.logs.error + "  Warning : " + currentData.logs.warning
       });
     }
+    this.setState({
+      cardData : updatedData,
+      current: currentData,
+      isRefresh: false,
+      autoRefresh: updatedData.autoRefresh,
+      refreshInterval: updatedData.refreshInterval / 60000,
+    });
   }
 
   setTimeInterval() {
@@ -52,12 +57,8 @@ class BranchCard extends React.Component {
     if(this.state.cardData.autoRefresh) {
       this.interval = setInterval(function(){
         self.refreshBranchClick();
-      },this.state.cardData.refreshInterval)
+      },this.state.cardData.refreshInterval || appData.defaultRefreshInterval)
     }
-  }
-
-  componentDidMount() {
-    window.$('#logModel').modal();
   }
 
   logDetailsClick(event) {
@@ -75,6 +76,8 @@ class BranchCard extends React.Component {
       this.setState({isRefresh: true});
       var self = this;
       fetchData(appData.branchInfo[this.state.cardData.branchType],this.state.cardData.branchName,(data)=>{
+          data.refreshInterval = self.state.cardData.refreshInterval;
+          data.autoRefresh = self.state.cardData.autoRefresh;
           model.update(data,(d)=>{
             self.props.branchUpdate(data);
           });
@@ -84,12 +87,33 @@ class BranchCard extends React.Component {
       });
   }
 
-  autoRefreshBranchClick() {
-    // UPDATE AUTO REFRESH VARIABLE
+  autoRefreshULClick(e){
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+  }
+
+  autoRefreshBranchClick(event) {
     var autoRefresh = !this.state.autoRefresh;
     this.setState({autoRefresh});
     this.state.cardData.autoRefresh = autoRefresh;
-    this.state.cardData.refreshInterval = 300000;
+    this.state.cardData.refreshInterval = this.state.refreshInterval * 60000;
+    var self = this;
+    model.update(this.state.cardData,(d)=>{
+      self.props.branchUpdate(this.state.cardData);
+    });
+    this.setTimeInterval();
+  }
+
+  autoRefreshInputClick(event) {
+    var value = event.target.value;
+    this.setState({
+      refreshInterval: value
+    });
+    this.state.cardData.refreshInterval = value * 60000;
+    var self = this;
+    model.update(this.state.cardData,(d)=>{
+      self.props.branchUpdate(this.state.cardData);
+    });
     this.setTimeInterval();
   }
 
@@ -104,14 +128,6 @@ class BranchCard extends React.Component {
  render() {
       return (
         <div className="col s3">
-          <div id="logModel" className="modal modal-fixed-footer">
-            <div className="modal-content">
-              <table id="logTable"></table>
-            </div>
-            <div className="modal-footer">
-              <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-            </div>
-          </div>
           <div className={"card batchCard " + appData.status[this.state.current.status].class}>
             <div className="card-content">
               <div className="statusBar">
@@ -147,18 +163,18 @@ class BranchCard extends React.Component {
                 <li><a onClick={this.deleteBranchClick}><span><i className="fa fa-trash-o"></i>Delete</span></a></li>
                 <li><a href={this.state.cardData.branchUrl}><span><i className="fa fa-link"></i>Runbot Link</span></a></li>
                 <li className="divider"></li>
-                <li className="autoRefreshElement">
+                <li className="autoRefreshElement" onClick={this.autoRefreshULClick}>
                   <span className="center-align">Auto Refresh</span>
                   <div className="switch center-align">
                     <label>
                       Off
-                      <input type="checkbox"/>
+                      <input type="checkbox" checked={this.state.autoRefresh} onChange={this.autoRefreshBranchClick}/>
                       <span className="lever"></span>
                       On
                     </label>
                   </div>
                   <div className="center-align">
-                    <input type="number" id="autoRefreshTime" value="15" />
+                    <input type="number" id="autoRefreshTime" value={this.state.refreshInterval} onChange={this.autoRefreshInputClick} disabled={classnames({'disabled':!this.state.autoRefresh})}/>
                   </div>
                 </li>
               </ul>

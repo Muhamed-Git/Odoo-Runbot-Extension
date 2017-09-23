@@ -1,10 +1,15 @@
 import demoData from '../data/DemoData.js'
 import _ from 'underscore'
+import AppData from '../data/AppData.js'
 
 const model = {
   set: (data,resolve) => {
       if(chrome.storage) {
         var temp = {};
+        data = Object.assign(data,{
+          autoRefresh: false,
+          refreshInterval: AppData.defaultRefreshInterval,
+        });
         temp[data.key] = data;
         chrome.storage.sync.set(temp, function() {
             resolve(data);

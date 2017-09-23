@@ -20,6 +20,11 @@ class Runbot extends React.Component {
       });
   }
 
+  componentDidUpdate() {
+    window.$('#logModel').modal();
+    window.$('.dropdown-button').dropdown();
+  }
+
    render() {
      if(this.state.cardDatas.length === 0) {
        return(<div>Loading</div>)
@@ -27,6 +32,14 @@ class Runbot extends React.Component {
 
       return (
          <div className="row cardContainer">
+           <div id="logModel" className="modal modal-fixed-footer">
+             <div className="modal-content">
+               <table id="logTable"></table>
+             </div>
+             <div className="modal-footer">
+               <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+             </div>
+           </div>
             {
               this.state.cardDatas.map((cardData,index)=>{
                 return <BranchCard data={cardData} key={index}/>

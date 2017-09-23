@@ -1,4 +1,5 @@
 var appData = {
+  defaultRefreshInterval: 20*60000,
   runbotURL: 'http://runbot.odoo.com',
   branchInfo: {
     odoodev: {

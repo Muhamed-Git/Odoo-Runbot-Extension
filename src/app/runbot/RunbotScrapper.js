@@ -7,10 +7,6 @@ var fetchData = function(branch,branchName,successCallback,errorCallBack) {
     ajexRequest(url,(htmlData)=>{
         var data = extractData(htmlData,{branchName,branch,url});
         if(data) {
-          data = Object.assign(data,{
-            autoRefresh: false,
-            refreshInterval: 0,
-          });
           fetchLogData(data,successCallback)
         } else {
           errorCallBack('Branch Not Found')
