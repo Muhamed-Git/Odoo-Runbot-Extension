@@ -20,6 +20,7 @@ class BranchCard extends React.Component {
         autoRefresh: this.props.data.autoRefresh,
         dropDownId: _.uniqueId('branchCardOption'),
         refreshInterval: this.props.data.refreshInterval / 60000,
+        logLoading: false,
       };
 
       this.refreshBranchClick = this.refreshBranchClick.bind(this);
@@ -28,6 +29,7 @@ class BranchCard extends React.Component {
       this.autoRefreshBranchClick = this.autoRefreshBranchClick.bind(this);
       this.autoRefreshULClick = this.autoRefreshULClick.bind(this);
       this.autoRefreshInputClick = this.autoRefreshInputClick.bind(this);
+      this.logDetailsClick = this.logDetailsClick.bind(this);
       this.setTimeInterval()
   }
 
@@ -64,11 +66,14 @@ class BranchCard extends React.Component {
   logDetailsClick(event) {
     var link = event.currentTarget.dataset.link;
     var type = event.currentTarget.dataset.type;
+    this.setState({logLoading:true});
+    var self = this;
     retriveLogElement(link,type,(tr) => {
       window.$('#logTable').empty();
       window.$('#logTable').attr('class',type);
       window.$('#logTable').append(tr);
       window.$('#logModel').modal('open');
+      self.setState({logLoading:false});
     })
   }
 
@@ -147,6 +152,7 @@ class BranchCard extends React.Component {
               </div>
               <div className="message right-align">
                 <span className={"left " + classnames({'show':this.state.isRefresh,'hide':!this.state.isRefresh})}><i className={"fa fa-refresh fa-fw " + classnames({'fa-spin':this.state.isRefresh})}></i> Refreshing</span>
+                <span className={"left " + classnames({'show':this.state.logLoading,'hide':!this.state.logLoading})}><i className={"fa fa-spinner fa-fw " + classnames({'fa-spin':this.state.logLoading})}></i> Loading</span>
                 <span>Last Update: {moment(this.state.cardData.lastUpdate).fromNow()}</span>
               </div>
             </div>
@@ -180,7 +186,10 @@ class BranchCard extends React.Component {
               </ul>
             </div>
             <div className="card-reveal">
-              <span className="card-title">Branches<i className="fa fa-times right"></i></span>
+              <span className="card-title">Branches
+                <i className="fa fa-times right"></i>
+                <span className={"right " + classnames({'show':this.state.logLoading,'hide':!this.state.logLoading})}><i className={"fa fa-spinner fa-fw " + classnames({'fa-spin':this.state.logLoading})}></i> Loading</span>
+              </span>
               <div className="otherBranch">
               {
                 this.state.cardData.branches.map((branch,key) => {

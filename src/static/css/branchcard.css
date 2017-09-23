@@ -5,7 +5,7 @@
   left: -1px;
   bottom: 0;
   right: auto;
-  width: 3px;
+  width: 4px;
 }
 .success::after {
   background-color: #2E7D32;
@@ -131,7 +131,7 @@
   padding: 4px;
   font-size: 14px;
 }
-.batchCard .card-reveal .card-title .fa {
+.batchCard .card-reveal .card-title .fa-times {
   padding-top: 5px;
   padding-right: 5px;
 }
