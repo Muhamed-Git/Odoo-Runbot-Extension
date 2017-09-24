@@ -1,3 +1,7 @@
+.runbotTitle {
+  font-family: 'Comfortaa', cursive;
+  color: #875a7b;
+}
 .batchCard::after {
   content: "";
   position: absolute;

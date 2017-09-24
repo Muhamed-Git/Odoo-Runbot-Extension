@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from './Header.js'
+import Home from './Home.js'
 import ActionButton from './ActionButton.js'
 import Runbot from './runbot/Runbot.js'
 import { connect } from 'react-redux'
@@ -15,6 +15,7 @@ class App extends React.Component {
 
   componentDidMount() {
       model.getAll(this.initState);
+      window.$('.scrollspy').scrollSpy();
   }
 
   initState(data) {
@@ -24,9 +25,38 @@ class App extends React.Component {
   render() {
       return (
          <div>
-            <Header />
-            <Runbot />
-            <ActionButton />
+           <ul className="side-nav fixed center-align section">
+             <li>
+               <a href="#home">
+                 <i className="fa fa-home" aria-hidden="true"></i>
+               </a>
+             </li>
+             <li>
+               <a href="#tabs">
+                 <i className="fa fa-star" aria-hidden="true"></i>
+               </a>
+             </li>
+             <li>
+               <a href="#runbot">
+                 <i className="fa fa-circle-o odoo" aria-hidden="true"></i>
+               </a>
+             </li>
+           </ul>
+
+           <div className="appContainer">
+             <div id="home" className="section scrollspy">
+               <Home />
+             </div>
+
+             <div id="tabs" className="section scrollspy">
+               <p>Content </p>
+             </div>
+
+             <div id="runbot" className="section scrollspy">
+                 <Runbot />
+             </div>
+           </div>
+          <ActionButton />
          </div>
       );
    }
