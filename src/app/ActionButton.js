@@ -1,5 +1,7 @@
 import React from 'react';
 import { RunbotAction , actionRunbotChild } from './runbot/RunbotAction.js'
+import { SettingAction , actionSettingChild } from './Setting.js'
+
 
 class Add extends React.Component {
    render() {
@@ -11,9 +13,11 @@ class Add extends React.Component {
                </a>
                <ul className="child">
                   {actionRunbotChild()}
+                  {actionSettingChild()}
                </ul>
              </div>
              <RunbotAction />
+             <SettingAction />
          </div>
       );
    }

@@ -46,3 +46,11 @@
 .appContainer #home .time .clock {
   font-size: 25px;
 }
+.appContainer #home .date {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+  padding-right: 10px;
+  padding-top: 10px;
+}

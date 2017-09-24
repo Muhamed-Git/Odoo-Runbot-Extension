@@ -40,7 +40,7 @@ class Runbot extends React.Component {
                <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
              </div>
            </div>
-           <div className="col s12 runbotTitle appTital">Odoo Runbot</div>
+           <div className="col s12 runbotTitle appTital">odoo runbot</div>
             {
               this.state.cardDatas.map((cardData,index)=>{
                 return <BranchCard data={cardData} key={index}/>

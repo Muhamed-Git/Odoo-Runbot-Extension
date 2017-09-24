@@ -3,9 +3,10 @@ import Home from './Home.js'
 import ActionButton from './ActionButton.js'
 import Runbot from './runbot/Runbot.js'
 import { connect } from 'react-redux'
-import { initState } from './actions'
+import { initBranchState , initSettingsState } from './actions'
 import demoData from './data/DemoData.js'
 import model from './model/DBA.js'
+import _ from 'underscore'
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +20,10 @@ class App extends React.Component {
   }
 
   initState(data) {
-    this.props.initState(data);
+    var settings = data.settings;
+    this.props.initSettingsState(settings);
+    delete data.settings;
+    this.props.initBranchState(_.values(data));
   }
 
   render() {
@@ -66,4 +70,4 @@ function mapStateToProps(store) {
     return {store}
 }
 
-export default connect(mapStateToProps,{initState})(App);
+export default connect(mapStateToProps,{ initBranchState , initSettingsState })(App);

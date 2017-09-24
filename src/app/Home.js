@@ -1,5 +1,7 @@
 import React from 'react';
 import moment from 'moment'
+import { connect } from 'react-redux'
+
 
 class Home extends React.Component {
 
@@ -12,6 +14,8 @@ class Home extends React.Component {
         currentTime: moment().format('h:mm'),
         clock: moment().format('a').toUpperCase(),
         greet: this.getMessage(),
+        userName: '',
+        clockType: false,
       }
   }
 
@@ -19,9 +23,18 @@ class Home extends React.Component {
     this.updateState();
   }
 
+  componentWillReceiveProps(nextProps) {
+      this.setState({
+        userName: nextProps.store.Setting.userName,
+        clockType: nextProps.store.Setting.clockType,
+        currentTime : nextProps.store.Setting.clockType ? moment().format('HH:mm') : moment().format('hh:mm')
+      });
+  }
+
   updateState() {
+    var currentTime = this.state.clockType ? moment().format('HH:mm') : moment().format('hh:mm');
     this.setState({
-      currentTime: moment().format('h:mm'),
+      currentTime,
       clock: moment().format('a').toUpperCase(),
       greet: this.getMessage(),
     });
@@ -48,12 +61,19 @@ class Home extends React.Component {
         <div>
           <div className="time center-align">
             <span className="currentTime">{this.state.currentTime}</span>
-            <span className="clock">{this.state.clock}</span>
+            {
+                !this.state.clockType ? <span className="clock">{this.state.clock}</span> : ''
+            }
           </div>
-          <div className="center-align userName">{this.state.greet}, Deep</div>
+          <span className="date">{moment().format('dddd, MMMM Do YYYY')}</span>
+          <div className="center-align userName">{this.state.greet}, {this.state.userName}</div>
         </div>
       );
    }
 }
 
-export default Home;
+function mapStateToProps(store) {
+    return {store}
+}
+
+export default connect(mapStateToProps,{})(Home)

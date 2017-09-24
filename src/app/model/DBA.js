@@ -18,10 +18,28 @@ const model = {
         resolve(data);
       }
   },
+  setSettings: (data,resolve) => {
+    if(chrome.storage) {
+      var temp = {};
+      temp['settings'] = data;
+      chrome.storage.sync.set(temp, function() {
+          resolve(data);
+      });
+    } else {
+      resolve(data);
+    }
+  },
   get: (key,store) => {
     var data = store.filter((f)=>f.key===key);
     if(data.length) {
       return data[0];
+    }
+    return {};
+  },
+  getSettings: (key,store) => {
+    var data = store.Settings;
+    if(data) {
+      return data;
     }
     return {};
   },
@@ -49,9 +67,9 @@ const model = {
     if(chrome.storage) {
       chrome.storage.sync.get(null, function(data) {
          if(data) {
-           resolve(_.values(data));
+           resolve(data);
          } else {
-           resolve([])
+           resolve({})
          }
       });
     } else {
