@@ -30,7 +30,7 @@
   height: 500px;
 }
 .appContainer #runbot {
-  height: 500px;
+  min-height: 500px;
 }
 .appContainer #home {
   height: 200px;

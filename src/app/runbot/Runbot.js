@@ -4,6 +4,8 @@ import { addData } from '../actions'
 import appData from '../data/AppData.js'
 import demoData from '../data/DemoData.js'
 import BranchCard from './BranchCard.js'
+import {RunbotAction } from './RunbotAction.js'
+import classnames from 'classnames'
 
 class Runbot extends React.Component {
 
@@ -11,7 +13,10 @@ class Runbot extends React.Component {
       super(props);
       this.state = {
         cardDatas: [],
+        activeDelete: false,
       }
+
+      this.onClickDeleteBranch = this.onClickDeleteBranch.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,11 +30,12 @@ class Runbot extends React.Component {
     window.$('.dropdown-button').dropdown();
   }
 
-   render() {
-     if(this.state.cardDatas.length === 0) {
-       return(<div>Loading</div>)
-     }
+  onClickDeleteBranch() {
+    this.setState({activeDelete: !this.state.activeDelete});
+  }
 
+   render() {
+     
       return (
          <div className="row cardContainer">
            <div id="logModel" className="modal modal-fixed-footer">
@@ -40,10 +46,20 @@ class Runbot extends React.Component {
                <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
              </div>
            </div>
-           <div className="col s12 runbotTitle appTital">odoo runbot</div>
+           <div className="col s12 runbotTitle appTital">
+             odoo runbot
+             <div className="runbotActions right">
+               <div className="center-align">
+                 <a className="modal-trigger" href="#addBranchModel"><i className="fa fa-plus-circle" aria-hidden="true"></i></a>
+               </div>
+               <div className="center-align">
+                 <a onClick={this.onClickDeleteBranch}><i className={classnames({'fa fa-trash-o':!this.state.activeDelete,'fa fa-stop-circle-o':this.state.activeDelete})} aria-hidden="true"></i></a>
+               </div>
+             </div>
+           </div>
             {
               this.state.cardDatas.map((cardData,index)=>{
-                return <BranchCard data={cardData} key={index}/>
+                return <BranchCard data={cardData} key={index} activeDelete={this.state.activeDelete}/>
               })
             }
          </div>

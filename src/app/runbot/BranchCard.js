@@ -14,6 +14,7 @@ class BranchCard extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
+        activeDelete: this.props.activeDelete,
         cardData: this.props.data,
         current: _.filter(this.props.data.branches,function(b){return b.order===1})[0],
         isRefresh: false,
@@ -43,6 +44,7 @@ class BranchCard extends React.Component {
       });
     }
     this.setState({
+      activeDelete: nextProps.activeDelete,
       cardData : updatedData,
       current: currentData,
       isRefresh: false,
@@ -132,12 +134,15 @@ class BranchCard extends React.Component {
 
  render() {
       return (
-        <div className="col s3">
+        <div className={"col s3 " + classnames({'transp shake-constant shake-constant--hover shake-little':this.state.activeDelete})}>
           <div className={"card batchCard " + appData.status[this.state.current.status].class}>
             <div className="card-content">
               <div className="statusBar">
                 <span className={"left status " + appData.status[this.state.current.status].class }>{this.state.current.statusString}</span>
                 <span className="right branchType">{appData.branchInfo[this.state.cardData.branchType].string}</span>
+                {
+                  this.state.activeDelete ? <div className="right deleteBranchDiv" onClick={this.deleteBranchClick}><i className="fa fa-trash-o"></i></div> : ''
+                }
               </div>
               <div className="branchNameDiv">
                 <span className="branchName tooltipped" data-position="bottom" data-delay="50" data-tooltip={this.state.cardData.branchName}>{this.state.cardData.branchName}</span>

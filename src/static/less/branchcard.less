@@ -3,7 +3,37 @@
 
 .runbotTitle {
   font-family: 'Comfortaa', cursive;
-  color: #875a7b;
+  color: @base-color;
+}
+
+.shake-little.shake-constant {
+  animation-duration: 3000ms !important;
+}
+
+.deleteBranchDiv {
+  position: absolute;
+  right: -6px;
+  top: -12px;
+  background-color: @status-red;
+  color: #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+
+.runbotActions {
+  display: flex;
+  div {
+    width: 50px;
+    font-size: 25px;
+    padding-top: 6px;
+  }
+  a {
+    color: @base-color;
+  }
 }
 
 .batchCard::after {
