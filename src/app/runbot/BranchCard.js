@@ -22,6 +22,7 @@ class BranchCard extends React.Component {
         dropDownId: _.uniqueId('branchCardOption'),
         refreshInterval: this.props.data.refreshInterval / 60000,
         logLoading: false,
+        isDeleted: false,
       };
 
       this.refreshBranchClick = this.refreshBranchClick.bind(this);
@@ -35,22 +36,26 @@ class BranchCard extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    var updatedData = nextProps.store.Branches.filter((s) => s.key === this.state.cardData.key)[0];
-    var currentData = _.filter(updatedData.branches,function(b){return b.order===1})[0];
-    if(updatedData.autoRefresh && this.state.isRefresh) {
-      ChromeNotification({
-        tital: currentData.statusString,
-        message: updatedData.branchName + " (" + appData.branchInfo[updatedData.branchType].string + ")" + "\n" + "Error : " + currentData.logs.error + "  Warning : " + currentData.logs.warning
-      });
-    }
     this.setState({
       activeDelete: nextProps.activeDelete,
-      cardData : updatedData,
-      current: currentData,
-      isRefresh: false,
-      autoRefresh: updatedData.autoRefresh,
-      refreshInterval: updatedData.refreshInterval / 60000,
     });
+    var updatedData = nextProps.store.Branches.filter((s) => s.key === this.state.cardData.key)[0];
+    if(updatedData) {
+      var currentData = _.filter(updatedData.branches,function(b){return b.order===1})[0];
+      if(updatedData.autoRefresh && this.state.isRefresh) {
+        ChromeNotification({
+          tital: currentData.statusString,
+          message: updatedData.branchName + " (" + appData.branchInfo[updatedData.branchType].string + ")" + "\n" + "Error : " + currentData.logs.error + "  Warning : " + currentData.logs.warning
+        });
+      }
+      this.setState({
+        cardData : updatedData,
+        current: currentData,
+        isRefresh: false,
+        autoRefresh: updatedData.autoRefresh,
+        refreshInterval: updatedData.refreshInterval / 60000,
+      });
+    }
   }
 
   setTimeInterval() {
@@ -128,13 +133,16 @@ class BranchCard extends React.Component {
       var self = this;
       model.delete(this.state.cardData,(d)=>{
         AppNotification(this.state.cardData.branchName + " is deleted")
+        //self.setState({isDeleted: true});
         self.props.branchDelete(this.state.cardData);
+        // let mountNode = React.findDOMNode(self.refs.col);
+        // let unmount = React.unmountComponentAtNode(mountNode);
       });
   }
 
  render() {
       return (
-        <div className={"col s3 " + classnames({'transp shake-constant shake-constant--hover shake-little':this.state.activeDelete})}>
+        <div className={"col s3 " + classnames({'hide ': this.state.isDeleted}) + classnames({'transp shake-constant shake-constant--hover shake-little':this.state.activeDelete})}>
           <div className={"card batchCard " + appData.status[this.state.current.status].class}>
             <div className="card-content">
               <div className="statusBar">
