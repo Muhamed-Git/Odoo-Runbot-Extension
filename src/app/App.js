@@ -1,5 +1,6 @@
 import React from 'react'
 import Home from './Home.js'
+import History from './history/History.js'
 import ActionButton from './ActionButton.js'
 import Runbot from './runbot/Runbot.js'
 import { connect } from 'react-redux'
@@ -36,8 +37,8 @@ class App extends React.Component {
                </a>
              </li>
              <li>
-               <a href="#tabs">
-                 <i className="fa fa-star" aria-hidden="true"></i>
+               <a href="#history">
+                 <i className="fa fa-history" aria-hidden="true"></i>
                </a>
              </li>
              <li>
@@ -52,8 +53,8 @@ class App extends React.Component {
                <Home />
              </div>
 
-             <div id="tabs" className="section scrollspy">
-               <p>Content </p>
+             <div id="history" className="section scrollspy">
+               <History />
              </div>
 
              <div id="runbot" className="section scrollspy">

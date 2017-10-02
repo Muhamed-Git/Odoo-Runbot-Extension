@@ -17,6 +17,7 @@
         "storage",
         "<all_urls>",
         "activeTab",
-        "notifications"
+        "notifications",
+        "history"
     ]
 }

@@ -1,0 +1,52 @@
+#history .back {
+  z-index: 111;
+  top: 70px;
+  left: 100px;
+  position: absolute;
+}
+#history .appTital {
+  position: relative;
+}
+#history .historyCard {
+  cursor: pointer;
+}
+#history .historyCard .card-content {
+  padding: 10px;
+  display: flex;
+}
+#history .historyCard .card-content .website-icon {
+  height: 30px;
+  width: 30px;
+  background-repeat: no-repeat;
+}
+#history .historyCard .card-content .website-name {
+  font-size: 18px;
+  padding-left: 10px;
+  padding-top: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+#history .historyCard .card-action {
+  padding: 5px;
+}
+#history .historyCard .card-action .tital {
+  margin: 0px;
+  font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+#history .collection {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+#history .collection .collection-item.avatar {
+  min-height: 60px;
+}
+#history .collection .collection-item.avatar .title {
+  font-size: 20px;
+  vertical-align: middle;
+}
