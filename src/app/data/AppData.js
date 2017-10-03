@@ -21,6 +21,16 @@ var appData = {
       string: 'Ent Dev',
       url: 'http://runbot.odoo.com/runbot/repo/git-github-com-odoo-dev-enterprise-8',
       key: 'entdev'
+    },
+    odootheme: {
+      string: 'Odoo Themes',
+      url: 'http://runbot.odoo.com/runbot/repo/git-github-com-odoo-design-themes-3',
+      key: 'odootheme'
+    },
+    odoothemedev: {
+      string: 'Odoo Themes Dev',
+      url: 'http://runbot.odoo.com/runbot/repo/git-github-com-odoo-dev-design-themes-9',
+      key: 'odoothemedev'
     }
   },
   status: {
