@@ -1,6 +1,7 @@
 import demoData from '../data/DemoData.js'
 import _ from 'underscore'
 import AppData from '../data/AppData.js'
+import ChromeAPI from '../Chrome/chrome.js'
 
 const model = {
   set: (data,resolve) => {
@@ -64,17 +65,15 @@ const model = {
     }
   },
   getAll: (resolve) => {
-    if(chrome.storage) {
-      chrome.storage.sync.get(null, function(data) {
-         if(data) {
-           resolve(data);
-         } else {
-           resolve({})
-         }
-      });
-    } else {
+    new ChromeAPI().get(null).then(function(data) {
+      if(data) {
+        resolve(data);
+      } else {
+        resolve({})
+      }
+    },function(error) {
       resolve(demoData);
-    }
+    });
   }
 }
 

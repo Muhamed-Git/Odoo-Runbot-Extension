@@ -59,7 +59,33 @@ const demoData = {
           warning: 10,
         }
       }]
-  }
+  },
+  history: [
+    {
+      id: 1,
+      lastVisitTime: 1507192209134.96,
+      title: "ODOO Runbot",
+      typedCount: 15,
+      url: 'http://runbot.odoo.com/runbot',
+      visitCount: 294
+    },
+    {
+      id: 2,
+      lastVisitTime: 1507191621037.4329,
+      title: "Google Image",
+      typedCount: 15,
+      url: 'http://google.com',
+      visitCount: 294
+    },
+    {
+      id: 3,
+      lastVisitTime: 1507184109853.593,
+      title: "Google Fonts",
+      typedCount: 0,
+      url: "https://fonts.google.com/",
+      visitCount: 4
+    }
+  ]
 };
 
 export default demoData;

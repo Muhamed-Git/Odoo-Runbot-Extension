@@ -26,6 +26,7 @@ class App extends React.Component {
     var settings = data.settings;
     this.props.initSettingsState(settings);
     delete data.settings;
+    delete data.history;
     this.props.initBranchState(_.values(data));
   }
 

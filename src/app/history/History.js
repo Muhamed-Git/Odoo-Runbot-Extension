@@ -1,8 +1,8 @@
 import React from 'react'
 import appData from '../data/AppData.js'
 import classnames from 'classnames'
-import ChromeAPI from './Chrome.js'
 import _ from 'underscore'
+import ChromeAPI from '../Chrome/chrome.js'
 
 require("./less/history.less");
 
@@ -40,14 +40,12 @@ class History extends React.Component {
 
   componentDidMount() {
     var self = this;
-    var microsecondsBack = 1000 * 60 * 60 * 24 * 10;//days;
-    var startTime = (new Date).getTime() - microsecondsBack;
     var options = {
       text: "",
-      startTime,
+      startTime: appData.getMilisecound(10),
       maxResults: 2000
     };
-    ChromeAPI.getGroups(options,(historyGroups) => {
+    new ChromeAPI().getHistoryGroups(options).then((historyGroups) => {
       self.setState({
         historyGroups: historyGroups
       });
@@ -66,12 +64,11 @@ class History extends React.Component {
                 return g.url === 'https://www.'+ key;
               });
               websiteUrl = websiteUrl.length > 0 ? websiteUrl[0].url :  props.groups[key][0].url;
-              console.log(websiteUrl);
               return(<div className="col s2" key={index}>
                 <div className="card historyCard hoverable" data-key={key} onClick={props.onHistoryGroupClick}>
                   <div className="card-content">
                     <img className="website-icon" src={'chrome://favicon/size/16@2x/'+websiteUrl}></img>
-                    <span className="website-name tooltipped" data-position="top" data-delay="50" data-tooltip={key}>{key}</span>
+                    <span className="website-name" title={key}>{key}</span>
                   </div>
                   <div className="card-action">
                     <a href={"http://www."+key}>Open</a>
