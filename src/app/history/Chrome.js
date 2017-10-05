@@ -16,9 +16,11 @@ var extractGroups = function(historys) {
 
 var ChromeAPI = {
   getHistory: function(options,successCallBack) {
+    if (chrome.history) {
       chrome.history.search(options, function (data) {
         successCallBack(data);
       });
+    }
   },
   getGroups: function (options,successCallBack) {
       this.getHistory(options,(data) => {

@@ -7,6 +7,8 @@ import BranchCard from './BranchCard.js'
 import {RunbotAction } from './RunbotAction.js'
 import classnames from 'classnames'
 
+require("./less/runbot.less");
+
 class Runbot extends React.Component {
 
   constructor(props) {
@@ -35,7 +37,7 @@ class Runbot extends React.Component {
   }
 
    render() {
-     
+
       return (
          <div className="row cardContainer">
            <div id="logModel" className="modal modal-fixed-footer">

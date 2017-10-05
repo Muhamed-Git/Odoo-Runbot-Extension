@@ -8,6 +8,8 @@ import model from '../model/DBA.js'
 import { AppNotification } from '../Notification.js'
 import classnames from 'classnames'
 
+require("./less/runbotaction.less");
+
 class RunbotAction extends React.Component {
 
   constructor(props) {

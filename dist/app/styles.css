@@ -1,3 +1,24 @@
+body {
+  font-size: 100%;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+nav {
+  background-color: #875a7b;
+}
+.appTital {
+  font-size: 30px;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+}
 #history .back {
   z-index: 111;
   top: 70px;
@@ -49,4 +70,382 @@
 #history .collection .collection-item.avatar .title {
   font-size: 20px;
   vertical-align: middle;
+}
+body {
+  font-size: 100%;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+nav {
+  background-color: #875a7b;
+}
+.appTital {
+  font-size: 30px;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+}
+#runbot .runbotTitle {
+  font-family: 'Comfortaa', cursive;
+  color: #875a7b;
+}
+#runbot .runbotActions {
+  display: flex;
+}
+#runbot .runbotActions div {
+  width: 50px;
+  font-size: 25px;
+  padding-top: 6px;
+}
+#runbot .runbotActions a {
+  color: #875a7b;
+}
+#runbot #addBranchModel .loading {
+  font-size: 17px;
+  padding-right: 25px;
+}
+#runbot #addBranchModel .loading .fa {
+  margin-right: 10px;
+}
+body {
+  font-size: 100%;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+nav {
+  background-color: #875a7b;
+}
+.appTital {
+  font-size: 30px;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+}
+#runbot .shake-little.shake-constant {
+  animation-duration: 3000ms !important;
+}
+#runbot .success::after {
+  background-color: #2E7D32;
+}
+#runbot .danger::after {
+  background-color: #c62828;
+}
+#runbot .warning::after {
+  background-color: #F9A825;
+}
+#runbot .killed::after,
+#runbot .info::after,
+#runbot .default::after {
+  background-color: #424242;
+}
+#runbot .logDetails {
+  cursor: pointer;
+}
+#runbot .deleteBranchDiv {
+  position: absolute;
+  right: -6px;
+  top: -12px;
+  background-color: #c62828;
+  color: #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+#runbot .batchCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  bottom: 0;
+  right: auto;
+  width: 4px;
+}
+#runbot .batchCard .card-content {
+  padding: 0;
+}
+#runbot .batchCard .card-content .statusBar {
+  height: 22px;
+  border-bottom: 1px solid #f1f1f1;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+#runbot .batchCard .card-content .statusBar .danger {
+  color: #c62828;
+}
+#runbot .batchCard .card-content .statusBar .warning {
+  color: #F9A825;
+}
+#runbot .batchCard .card-content .statusBar .success {
+  color: #2E7D32;
+}
+#runbot .batchCard .card-content .statusBar .killed,
+#runbot .batchCard .card-content .statusBar .info,
+#runbot .batchCard .card-content .statusBar .default {
+  color: #8F8F8F;
+}
+#runbot .batchCard .card-content .statusBar .action {
+  color: #21b799;
+}
+#runbot .batchCard .card-content .statusBar .branchType {
+  color: #875a7b;
+}
+#runbot .batchCard .card-content .branchNameDiv {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+#runbot .batchCard .card-content .branchNameDiv .branchName {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+#runbot .batchCard .card-content .logDetails {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: -webkit-box;
+  border-bottom: 1px solid #f1f1f1;
+}
+#runbot .batchCard .card-content .logDetails div {
+  width: 50%;
+}
+#runbot .batchCard .card-content .logDetails .warningLog {
+  color: #F9A825;
+}
+#runbot .batchCard .card-content .logDetails .errorLog {
+  color: #c62828;
+}
+#runbot .batchCard .card-content .message {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+#runbot .batchCard .card-action {
+  padding: 0;
+}
+#runbot .batchCard .card-action a {
+  margin-right: 0 !important;
+  width: 15%;
+  color: #21b799 !important;
+}
+#runbot .batchCard .card-action .branchCardOption {
+  width: auto !important;
+  overflow: hidden;
+}
+#runbot .batchCard .card-action .branchCardOption .divider {
+  min-height: 0 !important;
+}
+#runbot .batchCard .card-action .branchCardOption .autoRefreshElement span {
+  padding: 0px;
+  font-size: 13px;
+}
+#runbot .batchCard .card-action .branchCardOption .autoRefreshElement .switch .lever {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#runbot .batchCard .card-action .branchCardOption .autoRefreshElement #autoRefreshTime {
+  margin-bottom: 5px;
+  width: 40px;
+}
+#runbot .batchCard .card-action .branchCardOption a {
+  padding: 0;
+  font-size: 13px;
+}
+#runbot .batchCard .card-action .branchCardOption a span {
+  display: inline-flex;
+  width: max-content;
+  padding: 5px;
+}
+#runbot .batchCard .card-action .branchCardOption a span i {
+  padding-right: 5px;
+  padding-top: 4px;
+}
+#runbot .batchCard .card-action .branchCardOption li {
+  min-height: 20px;
+}
+#runbot .batchCard .card-reveal {
+  padding: 0;
+}
+#runbot .batchCard .card-reveal .card-title {
+  padding: 4px;
+  font-size: 14px;
+}
+#runbot .batchCard .card-reveal .card-title .fa-times {
+  padding-top: 5px;
+  padding-right: 5px;
+}
+#runbot .batchCard .card-reveal .otherBranch .branch {
+  padding-left: 5px;
+  margin-bottom: 5px;
+  padding-right: 10px;
+}
+#runbot .batchCard .card-reveal .otherBranch .branch .danger {
+  color: #c62828;
+}
+#runbot .batchCard .card-reveal .otherBranch .branch .warning {
+  color: #F9A825;
+}
+#runbot .batchCard .card-reveal .otherBranch .branch .success {
+  color: #2E7D32;
+}
+#runbot .batchCard .card-reveal .otherBranch .branch .killed,
+#runbot .batchCard .card-reveal .otherBranch .branch .info,
+#runbot .batchCard .card-reveal .otherBranch .branch .default {
+  color: #8F8F8F;
+}
+#runbot .batchCard .card-reveal .otherBranch .branch .action {
+  color: #21b799;
+}
+#runbot .batchCard .card-reveal .otherBranch .branch span,
+#runbot .batchCard .card-reveal .otherBranch .branch a {
+  border: none;
+}
+#runbot .batchCard .card-reveal .otherBranch .branch a {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#runbot .batchCard .card-reveal .otherBranch .danger {
+  border-left: 3px solid #c62828;
+}
+#runbot .batchCard .card-reveal .otherBranch .warning {
+  border-left: 3px solid #F9A825;
+}
+#runbot .batchCard .card-reveal .otherBranch .success {
+  border-left: 3px solid #2E7D32;
+}
+#runbot .batchCard .card-reveal .otherBranch .killed,
+#runbot .batchCard .card-reveal .otherBranch .info,
+#runbot .batchCard .card-reveal .otherBranch .default {
+  border-left: 3px solid #8F8F8F;
+}
+body {
+  font-size: 100%;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+nav {
+  background-color: #875a7b;
+}
+.appTital {
+  font-size: 30px;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+}
+#runbot #logModel {
+  max-height: 80%;
+  width: 90%;
+}
+#runbot #logModel table.danger td {
+  border: 1px solid #c62828;
+}
+#runbot #logModel table.warning td {
+  border: 1px solid #F9A825;
+}
+#runbot #logModel .danger {
+  background-color: #f4c6c6;
+}
+#runbot #logModel .warning {
+  background-color: #fef7ec;
+}
+body {
+  font-size: 100%;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+nav {
+  background-color: #875a7b;
+}
+.appTital {
+  font-size: 30px;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+}
+.side-nav {
+  width: 50px;
+  background-color: #875a7b;
+}
+.side-nav li .active {
+  background-color: #fff;
+}
+.side-nav li .active i {
+  color: #875a7b;
+}
+.side-nav li .active :hover {
+  background-color: #fff;
+}
+.side-nav li a {
+  padding: 0px;
+}
+.side-nav li a i {
+  color: #fff;
+  margin: 0;
+  width: 100%;
+  font-size: 20px;
+}
+.side-nav li a .odoo {
+  font-weight: 800;
+}
+.appContainer {
+  margin-left: 50px;
+}
+.appContainer #tabs {
+  height: 500px;
+}
+.appContainer #runbot {
+  min-height: 500px;
+}
+.appContainer #home {
+  height: 200px;
+  color: #fff;
+  background: linear-gradient(to right, #21b799 0%, #875a7b 100%);
+}
+.appContainer #home .userName {
+  font-size: 30px;
+}
+.appContainer #home .time {
+  font-size: 80px;
+}
+.appContainer #home .time .clock {
+  font-size: 25px;
+}
+.appContainer #home .date {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+  padding-right: 10px;
+  padding-top: 10px;
 }

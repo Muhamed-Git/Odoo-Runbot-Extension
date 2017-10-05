@@ -9,6 +9,8 @@ import model from '../model/DBA.js'
 import classnames from 'classnames'
 import moment from 'moment'
 
+require("./less/branchcard.less");
+
 class BranchCard extends React.Component {
 
   constructor(props) {

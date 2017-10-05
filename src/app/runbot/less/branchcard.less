@@ -1,0 +1,181 @@
+@import "../../less/base.less";
+
+#runbot {
+
+  .shake-little.shake-constant {
+    animation-duration: 3000ms !important;
+  }
+
+  .success::after {
+    background-color: @status-green;
+  }
+
+  .danger::after {
+    background-color: @status-red;
+  }
+
+  .warning::after {
+    background-color: @status-yellow;
+  }
+
+  .killed::after , .info::after , .default::after {
+    background-color: @status-gray;
+  }
+
+  .logDetails {
+    cursor: pointer;
+  }
+
+  .deleteBranchDiv {
+    position: absolute;
+    right: -6px;
+    top: -12px;
+    background-color: @status-red;
+    color: #fff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    padding-left: 5px;
+    padding-top: 2px;
+  }
+
+  .batchCard::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1px;
+    bottom: 0;
+    right: auto;
+    width: 4px;
+  }
+
+  .batchCard {
+    .card-content {
+      padding: 0;
+
+      .statusBar {
+        height: 22px;
+        border-bottom: 1px solid #f1f1f1;
+        padding-right: 10px;
+        padding-left: 10px;
+        .fontColorStatus;
+        .branchType {
+          color: @base-color;
+        }
+      }
+
+      .branchNameDiv {
+        padding-left: 10px;
+        padding-right: 10px;
+        border-bottom: 1px solid #f1f1f1;
+        .branchName {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          display: block;
+        }
+      }
+
+      .logDetails {
+        padding-left: 10px;
+        padding-right: 10px;
+        display: -webkit-box;
+        border-bottom: 1px solid #f1f1f1;
+        div {
+          width: 50%;
+        }
+        .warningLog {
+          color: @status-yellow;
+        }
+        .errorLog {
+          color: @status-red;
+        }
+      }
+
+      .message {
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 12px;
+      }
+    }
+
+    .card-action {
+      padding: 0;
+
+      a {
+        margin-right: 0 !important;
+        width: 15%;
+        color: @odoo-primary !important;
+      }
+
+      .branchCardOption {
+        width: auto !important;
+        overflow: hidden;
+        .divider {
+          min-height: 0 !important;
+        }
+        .autoRefreshElement {
+          span {
+            padding: 0px;
+            font-size: 13px;
+          }
+          .switch{
+            .lever {
+              margin-left: 5px;
+              margin-right: 5px;
+            }
+          }
+          #autoRefreshTime {
+            margin-bottom: 5px;
+            width: 40px;
+          }
+        }
+        a {
+          padding: 0;
+          font-size: 13px;
+          span {
+            display: inline-flex;
+            width: max-content;
+            padding: 5px;
+            i {
+              padding-right: 5px;
+              padding-top: 4px;
+            }
+          }
+        }
+        li {
+          min-height: 20px;
+        }
+      }
+    }
+
+    .card-reveal {
+      padding: 0;
+      .card-title {
+        padding: 4px;
+        font-size: 14px;
+        .fa-times {
+          padding-top: 5px;
+          padding-right: 5px;
+        }
+      }
+      .otherBranch {
+        .branch{
+          padding-left: 5px;
+          margin-bottom: 5px;
+          padding-right: 10px;
+          .fontColorStatus();
+          span, a{
+            border: none;
+          }
+          a {
+            margin-left: 5px;
+            margin-right: 5px;
+          }
+        }
+        .borderColorStatus();
+      }
+    }
+  }
+}

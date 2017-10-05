@@ -9,6 +9,8 @@ import demoData from './data/DemoData.js'
 import model from './model/DBA.js'
 import _ from 'underscore'
 
+require("./less/app.less");
+
 class App extends React.Component {
   constructor(props) {
       super(props);
