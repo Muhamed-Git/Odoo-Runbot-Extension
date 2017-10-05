@@ -144,7 +144,7 @@ class BranchCard extends React.Component {
 
  render() {
       return (
-        <div className={"col s3 " + classnames({'hide ': this.state.isDeleted}) + classnames({'transp shake-constant shake-constant--hover shake-little':this.state.activeDelete})}>
+        <div className={"col s3 " + classnames({'hide ': this.state.isDeleted}) + classnames({'shakeme':this.state.activeDelete})}>
           <div className={"card batchCard " + appData.status[this.state.current.status].class}>
             <div className="card-content">
               <div className="statusBar">
