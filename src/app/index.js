@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import App from './App.js';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import combineReducers from './reducers';
+import combineReducers from './Reducers.js';
 
 const store = createStore(combineReducers,window.devToolsExtension && window.devToolsExtension());
 

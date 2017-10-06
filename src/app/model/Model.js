@@ -1,5 +1,6 @@
 import ChromeAPI from '../Chrome/chrome.js'
 import _ from 'underscore'
+import demoData from '../data/DemoData.js'
 
 class Model {
   constructor(key,store) {
@@ -51,7 +52,7 @@ class Model {
     this.chromeAPI.get(this.key === "null" ? null : this.key).then(function(data){
       resolver(data)
     },function() {
-      resolver(data)
+      resolver(demoData)
     });
   }
 }

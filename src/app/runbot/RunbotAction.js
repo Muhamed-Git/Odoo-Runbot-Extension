@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { addBranch } from '../actions'
+import { addBranch } from './RunbotActions.js'
 import appData from '../data/AppData.js'
 import _ from 'underscore'
 import { fetchData } from './RunbotScrapper.js'

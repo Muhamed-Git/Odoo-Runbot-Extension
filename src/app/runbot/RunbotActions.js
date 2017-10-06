@@ -31,19 +31,3 @@ export const initBranchState = (data) => {
     }
     return action;
 }
-
-export const initSettingsState = (data) => {
-    const action = {
-      type: constants.INIT_SETTINGS_STATE,
-      data
-    }
-    return action;
-}
-
-export const updateSettings = (data) => {
-    const action = {
-      type: constants.UPDATE_SETTINGS,
-      data
-    }
-    return action;
-}

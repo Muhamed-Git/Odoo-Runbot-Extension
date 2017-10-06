@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import _ from 'underscore'
 import classnames from 'classnames'
-import { updateSettings } from '../actions'
+import { updateSettings } from './SettingAction.js'
 import Model from './Model.js'
 import { AppNotification } from '../Notification.js'
 

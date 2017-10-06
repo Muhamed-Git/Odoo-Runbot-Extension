@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addData } from '../actions'
+import { addData } from './RunbotAction.js'
 import appData from '../data/AppData.js'
 import demoData from '../data/DemoData.js'
 import BranchCard from './BranchCard.js'
