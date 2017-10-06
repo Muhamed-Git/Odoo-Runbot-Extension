@@ -4,7 +4,7 @@ import { addBranch } from '../actions'
 import appData from '../data/AppData.js'
 import _ from 'underscore'
 import { fetchData } from './RunbotScrapper.js'
-import model from '../model/DBA.js'
+import Model from '../model/Model.js'
 import { AppNotification } from '../Notification.js'
 import classnames from 'classnames'
 
@@ -20,7 +20,7 @@ class RunbotAction extends React.Component {
         branchName: '',
         branchType: '',
       }
-
+      this.model = new Model('Branches');
       this.handleChange = this.handleChange.bind(this);
   }
 
@@ -46,7 +46,7 @@ class RunbotAction extends React.Component {
      this.setState({loading: true});
      var self = this;
      fetchData(appData.branchInfo[this.state.branchType],this.state.branchName,(data)=>{
-       model.set(data,(d)=>{
+       self.model.set(data,self.props.store,(d)=>{
          self.props.addBranch(d);
          window.$('#addBranchModel').modal('close');
        });
@@ -80,7 +80,7 @@ class RunbotAction extends React.Component {
                  <div className="row">
                    <div className="input-field col s12">
                      <select id="selectedBranch">
-                       <option value="" disabled selected>Choose your option</option>
+                       <option value="" disabled>Choose your option</option>
                        {
                          _.keys(appData.branchInfo).map((branch,index)=>{
                             return(<option value={branch} key={index}>{appData.branchInfo[branch].string}</option>)
@@ -114,7 +114,11 @@ function actionRunbotChild() {
   return(<li><a className="btn-floating waves-effect waves-light modal-trigger" href="#addBranchModel"><i className="fa fa-plus"></i></a></li>)
 }
 
+function mapStateToProps(store) {
+    return {store}
+}
+
 module.exports = {
   actionRunbotChild,
-  RunbotAction: connect(null,{addBranch})(RunbotAction)
+  RunbotAction: connect(mapStateToProps,{addBranch})(RunbotAction)
 }

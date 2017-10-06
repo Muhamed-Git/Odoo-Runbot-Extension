@@ -3,7 +3,7 @@ import _ from 'underscore'
 
 class ChromeAPI {
   constructor() {
-      this.storage = chrome.storage ? chrome.storage.sync : undefined;
+      this.storage = chrome.storage ? chrome.storage.local : undefined;
       this.history = chrome.history;
       this.bookmarks = chrome.bookmarks;
   }

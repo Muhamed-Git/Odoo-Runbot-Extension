@@ -6,7 +6,7 @@ import Runbot from './runbot/Runbot.js'
 import { connect } from 'react-redux'
 import { initBranchState , initSettingsState } from './actions'
 import demoData from './data/DemoData.js'
-import model from './model/DBA.js'
+import Model from './model/Model.js'
 import _ from 'underscore'
 
 require("./less/app.less");
@@ -15,19 +15,17 @@ class App extends React.Component {
   constructor(props) {
       super(props);
       this.initState = this.initState.bind(this);
+      this.model = new Model("null");
   }
 
   componentDidMount() {
-      model.getAll(this.initState);
+      this.model.getAll(this.initState);
       window.$('.scrollspy').scrollSpy();
   }
 
   initState(data) {
-    var settings = data.settings;
-    this.props.initSettingsState(settings);
-    delete data.settings;
-    delete data.history;
-    this.props.initBranchState(_.values(data));
+    this.props.initSettingsState(data.Setting);
+    this.props.initBranchState(_.values(data.Branches));
   }
 
   render() {

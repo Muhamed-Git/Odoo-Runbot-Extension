@@ -1,6 +1,6 @@
 import React from 'react';
 import { RunbotAction , actionRunbotChild } from './runbot/RunbotAction.js'
-import { SettingAction , actionSettingChild } from './Setting.js'
+import { SettingAction , actionSettingChild } from './Settings/Setting.js'
 
 
 class Add extends React.Component {

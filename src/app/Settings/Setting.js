@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import _ from 'underscore'
 import classnames from 'classnames'
-import { updateSettings } from './actions'
-import model from './model/DBA.js'
-import { AppNotification } from './Notification.js'
+import { updateSettings } from '../actions'
+import Model from './Model.js'
+import { AppNotification } from '../Notification.js'
 
 class SettingAction extends React.Component {
 
@@ -16,6 +16,8 @@ class SettingAction extends React.Component {
       }
       this.onChangeUserName = this.onChangeUserName.bind(this);
       this.onClockTypeClick = this.onClockTypeClick.bind(this);
+
+      this.model = new Model('Setting');
   }
 
    componentDidMount() {
@@ -29,8 +31,8 @@ class SettingAction extends React.Component {
 
    componentWillReceiveProps(nextProps) {
      this.setState({
-       userName: nextProps.store.Setting.userName,
-       clockType: nextProps.store.Setting.clockType,
+       userName: nextProps.store.Setting.userName || '',
+       clockType: nextProps.store.Setting.clockType || false,
      });
    }
 
@@ -51,7 +53,7 @@ class SettingAction extends React.Component {
        userName:this.state.userName,
        clockType: this.state.clockType,
      };
-     model.setSettings(data,(d) => {
+     this.model.set(data,this.props.store,(d) => {
        this.props.updateSettings(data);
      });
      AppNotification("Settings Saved")
@@ -67,12 +69,12 @@ class SettingAction extends React.Component {
                  <div className="row">
                     <div className="input-field col s6">
                       <input placeholder="Ex. Deep" id="userNameInput" type="text" onChange={this.onChangeUserName} value={this.state.userName} className="validate"/>
-                      <label for="userNameInput">User Name</label>
+                      <label htmlFor="userNameInput">User Name</label>
                     </div>
                  </div>
                  <p>
                    <input type="checkbox" id="clockSelect" checked={classnames({'checked':this.state.clockType})} value={this.state.clockType}/>
-                   <label for="clockSelect" onClick={this.onClockTypeClick}>24 H Clock</label>
+                   <label htmlFor="clockSelect" onClick={this.onClockTypeClick}>24 H Clock</label>
                  </p>
                </div>
                <div className="modal-footer">

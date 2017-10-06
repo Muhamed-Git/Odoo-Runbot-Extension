@@ -14,11 +14,6 @@ body {
 nav {
   background-color: #875a7b;
 }
-.appTital {
-  font-size: 30px;
-  background: #f9f9f9;
-  margin-bottom: 15px;
-}
 #history .back {
   z-index: 111;
   top: 70px;
@@ -87,11 +82,6 @@ body {
 nav {
   background-color: #875a7b;
 }
-.appTital {
-  font-size: 30px;
-  background: #f9f9f9;
-  margin-bottom: 15px;
-}
 #runbot .runbotTitle {
   font-family: 'Comfortaa', cursive;
   color: #875a7b;
@@ -129,11 +119,6 @@ body {
 }
 nav {
   background-color: #875a7b;
-}
-.appTital {
-  font-size: 30px;
-  background: #f9f9f9;
-  margin-bottom: 15px;
 }
 @-webkit-keyframes shakemeanimation {
   2% {
@@ -512,11 +497,6 @@ body {
 nav {
   background-color: #875a7b;
 }
-.appTital {
-  font-size: 30px;
-  background: #f9f9f9;
-  margin-bottom: 15px;
-}
 #runbot #logModel {
   max-height: 80%;
   width: 90%;
@@ -548,11 +528,6 @@ body {
 }
 nav {
   background-color: #875a7b;
-}
-.appTital {
-  font-size: 30px;
-  background: #f9f9f9;
-  margin-bottom: 15px;
 }
 .side-nav {
   width: 50px;
@@ -587,6 +562,12 @@ nav {
 }
 .appContainer #runbot {
   min-height: 500px;
+}
+.appContainer .appTital {
+  font-size: 30px;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+  color: #875a7b;
 }
 .appContainer #home {
   height: 200px;
