@@ -1,0 +1,41 @@
+@import "base.less";
+
+
+.side-nav {
+  width:50px;
+  background-color:#875a7b;
+  li {
+    .active {
+      background-color: #fff;
+      i {
+        color: #875a7b;
+      }
+      :hover {
+        background-color: #fff;
+      }
+    }
+    a {
+      padding: 0px;
+      i {
+        color: #fff;
+        margin: 0;
+        width: 100%;
+        font-size: 20px;
+      }
+      .odoo {
+        font-weight: 800;
+      }
+    }
+  }
+}
+
+.appContainer {
+  margin-left: 50px;
+
+  .appTital {
+    font-size: 30px;
+    background: #f9f9f9;
+    margin-bottom: 15px;
+    color: @base-color;
+  }
+}

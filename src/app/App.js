@@ -1,16 +1,26 @@
+// Library
 import React from 'react'
-import Home from './Home.js'
-import History from './history/History.js'
-import ActionButton from './ActionButton.js'
-import Runbot from './runbot/Runbot.js'
-import { connect } from 'react-redux'
-import { initBranchState } from './runbot/RunbotActions.js'
-import { initSettingsState } from './Settings/SettingAction.js'
-import demoData from './data/DemoData.js'
-import Model from './model/Model.js'
 import _ from 'underscore'
 
-require("./less/app.less");
+// Redux
+import { connect } from 'react-redux'
+import { initBranchState } from './modules/runbot/redux/actions.js'
+import { initSettingsState } from './modules/settings/redux/actions.js'
+
+// Components (Base)
+import ActionButton from './modules/basebutton/basebutton.js'
+import Model from './modules/base/model/model.js'
+
+// Demo Data
+import demoData from './static/demodata/DemoData.js'
+
+// Components
+import Home from './modules/home/home.js'
+import History from './modules/history/history.js'
+import Runbot from './modules/runbot/runbot.js'
+
+// LESS
+require("./static/less/app.less");
 
 class App extends React.Component {
   constructor(props) {

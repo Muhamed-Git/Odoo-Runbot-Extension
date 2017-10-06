@@ -1,0 +1,26 @@
+@import "../../../static/less/base.less";
+
+#runbot {
+  min-height: 500px;
+  #logModel {
+    max-height: 80%;
+    width: 90%;
+    table.danger {
+      td {
+        border: 1px solid @status-red;
+      }
+    }
+    table.warning {
+      td {
+        border: 1px solid @status-yellow;
+      }
+    }
+    .danger{
+      background-color: lighten(@status-red,40%);
+    }
+
+    .warning{
+      background-color: lighten(@status-yellow,40%);
+    }
+  }
+}

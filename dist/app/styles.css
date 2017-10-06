@@ -14,6 +14,66 @@ body {
 nav {
   background-color: #875a7b;
 }
+#runbot .runbotTitle {
+  font-family: 'Comfortaa', cursive;
+  color: #875a7b;
+}
+#runbot .runbotActions {
+  display: flex;
+}
+#runbot .runbotActions div {
+  width: 50px;
+  font-size: 25px;
+  padding-top: 6px;
+}
+#runbot .runbotActions a {
+  color: #875a7b;
+}
+#runbot #addBranchModel .loading {
+  font-size: 17px;
+  padding-right: 25px;
+}
+#runbot #addBranchModel .loading .fa {
+  margin-right: 10px;
+}
+#home {
+  height: 200px;
+  color: #fff;
+  background: linear-gradient(to right, #21b799 0%, #875a7b 100%);
+}
+#home .userName {
+  font-size: 30px;
+}
+#home .time {
+  font-size: 80px;
+}
+#home .time .clock {
+  font-size: 25px;
+}
+#home .date {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+body {
+  font-size: 100%;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+nav {
+  background-color: #875a7b;
+}
 #history .back {
   z-index: 111;
   top: 70px;
@@ -65,44 +125,6 @@ nav {
 #history .collection .collection-item.avatar .title {
   font-size: 20px;
   vertical-align: middle;
-}
-body {
-  font-size: 100%;
-}
-.brand-logo {
-  padding-left: 10px !important;
-  font-family: 'Comfortaa', cursive;
-}
-.actionbutton .parent {
-  background-color: #875a7b;
-}
-.actionbutton .child a {
-  background-color: #21b799;
-}
-nav {
-  background-color: #875a7b;
-}
-#runbot .runbotTitle {
-  font-family: 'Comfortaa', cursive;
-  color: #875a7b;
-}
-#runbot .runbotActions {
-  display: flex;
-}
-#runbot .runbotActions div {
-  width: 50px;
-  font-size: 25px;
-  padding-top: 6px;
-}
-#runbot .runbotActions a {
-  color: #875a7b;
-}
-#runbot #addBranchModel .loading {
-  font-size: 17px;
-  padding-right: 25px;
-}
-#runbot #addBranchModel .loading .fa {
-  margin-right: 10px;
 }
 body {
   font-size: 100%;
@@ -497,6 +519,9 @@ body {
 nav {
   background-color: #875a7b;
 }
+#runbot {
+  min-height: 500px;
+}
 #runbot #logModel {
   max-height: 80%;
   width: 90%;
@@ -557,37 +582,9 @@ nav {
 .appContainer {
   margin-left: 50px;
 }
-.appContainer #tabs {
-  height: 500px;
-}
-.appContainer #runbot {
-  min-height: 500px;
-}
 .appContainer .appTital {
   font-size: 30px;
   background: #f9f9f9;
   margin-bottom: 15px;
   color: #875a7b;
-}
-.appContainer #home {
-  height: 200px;
-  color: #fff;
-  background: linear-gradient(to right, #21b799 0%, #875a7b 100%);
-}
-.appContainer #home .userName {
-  font-size: 30px;
-}
-.appContainer #home .time {
-  font-size: 80px;
-}
-.appContainer #home .time .clock {
-  font-size: 25px;
-}
-.appContainer #home .date {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 20px;
-  padding-right: 10px;
-  padding-top: 10px;
 }
