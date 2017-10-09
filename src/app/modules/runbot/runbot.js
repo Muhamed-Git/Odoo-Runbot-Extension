@@ -68,7 +68,7 @@ class Runbot extends React.Component {
            </div>
             {
               this.state.cardDatas.map((cardData,index)=>{
-                return <BranchCard data={cardData} key={index} activeDelete={this.state.activeDelete}/>
+                return <BranchCard data={cardData} key={cardData.key} activeDelete={this.state.activeDelete}/>
               })
             }
          </div>

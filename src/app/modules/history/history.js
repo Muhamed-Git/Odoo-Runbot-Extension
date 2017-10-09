@@ -71,8 +71,8 @@ class History extends React.Component {
               });
               websiteUrl = websiteUrl.length > 0 ? websiteUrl[0].url :  props.groups[key][0].url;
               return(<div className="col s2" key={index}>
-                <div className="card historyCard hoverable" data-key={key} onClick={props.onHistoryGroupClick}>
-                  <div className="card-content">
+                <div className="card historyCard hoverable">
+                  <div className="card-content" data-key={key} onClick={props.onHistoryGroupClick}>
                     <img className="website-icon" src={'chrome://favicon/size/16@2x/'+websiteUrl}></img>
                     <span className="website-name" title={key}>{key}</span>
                   </div>
@@ -95,7 +95,6 @@ class History extends React.Component {
               <span className="title">{props.data.key}</span>
               <a href={"http://www."+props.data.key} className="secondary-content"><i className="fa fa-globe fa-2x"></i></a>
             </li>
-
             {
               props.data.data.map((d) =>
                   <li className="collection-item"><a href={d.url}>{d.url}</a></li>
@@ -109,7 +108,7 @@ class History extends React.Component {
           <div className="row cardContainer">
             <div className="col s12 runbotTitle appTital">
               History
-              <div className="runbotActions right"></div>
+              <div className="right"></div>
               <div className={"back " + classnames({'hide': this.state.groupsView})} onClick={this.onBackClick}><i className="fa fa-arrow-left" aria-hidden="true"></i></div>
             </div>
             {

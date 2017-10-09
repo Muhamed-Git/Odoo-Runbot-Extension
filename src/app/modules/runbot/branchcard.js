@@ -49,10 +49,12 @@ class BranchCard extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      activeDelete: nextProps.activeDelete,
-    });
-    var updatedData = nextProps.store.Branches.filter((s) => s.key === this.state.cardData.key)[0];
+      this.setState({
+        activeDelete: nextProps.activeDelete,
+      });
+  }
+
+  updateComponentData(updatedData) {
     if(updatedData) {
       var currentData = _.filter(updatedData.branches,function(b){return b.order===1})[0];
       if(updatedData.autoRefresh && this.state.isRefresh) {
@@ -104,6 +106,7 @@ class BranchCard extends React.Component {
           data.refreshInterval = self.state.cardData.refreshInterval;
           data.autoRefresh = self.state.cardData.autoRefresh;
           self.model.update(data,self.props.store,(d)=>{
+            self.updateComponentData(data);
             self.props.branchUpdate(data);
           });
       },(error) => {

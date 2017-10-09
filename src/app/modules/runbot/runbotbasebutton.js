@@ -56,6 +56,10 @@ class RunbotAction extends React.Component {
      this.setState({loading: true});
      var self = this;
      fetchData(appData.branchInfo[this.state.branchType],this.state.branchName,(data)=>{
+       data = _.extend(data,{
+         autoRefresh: false,
+         refreshInterval: appData.defaultRefreshInterval
+       });
        self.model.set(data,self.props.store,(d)=>{
          self.props.addBranch(d);
          window.$('#addBranchModel').modal('close');
