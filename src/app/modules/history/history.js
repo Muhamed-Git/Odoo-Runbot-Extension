@@ -6,6 +6,9 @@ import _ from 'underscore'
 // Base
 import ChromeAPI from '../base/chrome/chrome.js'
 
+// Redux
+import { connect } from 'react-redux'
+
 // App Data
 import appData from './data.js'
 
@@ -22,11 +25,13 @@ class History extends React.Component {
       this.state = {
         historyGroups: [],
         groupsView: true,
-        historyListViewData: []
+        historyListViewData: [],
+        defaultHistoryDate: 1,
       }
       this.onHistoryGroupClick = this.onHistoryGroupClick.bind(this);
       this.onBackClick = this.onBackClick.bind(this);
       this.selectDateOnChange = this.selectDateOnChange.bind(this);
+      this.changeHistoryDate = this.changeHistoryDate.bind(this);
   }
 
   onHistoryGroupClick(event) {
@@ -48,6 +53,16 @@ class History extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+      let defaultHistoryDate =  nextProps.store.Setting.defaultHistoryDate;
+      if(defaultHistoryDate) {
+        this.changeHistoryDate(defaultHistoryDate);
+        this.setState({
+          defaultHistoryDate
+        })
+      }
+  }
+
   componentDidMount() {
     var self = this;
     var options = {
@@ -60,15 +75,16 @@ class History extends React.Component {
         historyGroups: historyGroups
       });
     });
-
-    window.$('#selectHistoryDate').on('change',function(){
-        self.selectDateOnChange(window.$('#selectHistoryDate').val());
-    });
   }
 
-  selectDateOnChange(days) {
-    var ms = appData.getMilisecound(parseInt(days,10));
-    var options = {
+  selectDateOnChange(event) {
+    let days = event.target.value;
+    this.changeHistoryDate(days);
+  }
+
+  changeHistoryDate (days) {
+    let ms = appData.getMilisecound(days);
+    let options = {
       text: "",
       startTime: ms,
       maxResults: 2000
@@ -76,7 +92,8 @@ class History extends React.Component {
     var self = this;
     new ChromeAPI().getHistoryGroups(options).then((historyGroups) => {
       self.setState({
-        historyGroups: historyGroups
+        historyGroups: historyGroups,
+        defaultHistoryDate: days,
       });
     });
   }
@@ -134,7 +151,7 @@ class History extends React.Component {
               <div className="right">
                   <div className="selectDateDiv">
                     <i className="fa fa-clock-o"></i>
-                    <select className="selectDate" id="selectHistoryDate">
+                    <select class="browser-default selectDate" id="selectHistoryDate" value={this.state.defaultHistoryDate} onChange={this.selectDateOnChange}>
                       <option value="1">Yesterday</option>
                       <option value="7">Last Week</option>
                       <option value="14">Last 2 Weeks</option>
@@ -157,4 +174,8 @@ class History extends React.Component {
    }
 }
 
-export default History;
+function mapStateToProps(store) {
+    return {store}
+}
+
+export default connect(mapStateToProps,{})(History);

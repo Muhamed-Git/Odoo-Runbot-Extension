@@ -36,6 +36,46 @@ nav {
 #runbot #addBranchModel .loading .fa {
   margin-right: 10px;
 }
+body {
+  font-size: 100%;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+nav {
+  background-color: #875a7b;
+}
+#settingModel .settingContainer {
+  background: #fff;
+}
+#settingModel .settingContainer .collection {
+  border: none;
+}
+#settingModel .settingContainer .collection .collection-item {
+  border: none;
+  padding: 0;
+}
+#settingModel .settingContainer .tabs a {
+  color: #875a7b;
+}
+#settingModel .settingContainer .tabs .indicator {
+  background-color: #875a7b;
+}
+#settingModel .settingContainer .tabs .indicator {
+  left: 0;
+  right: 493px;
+}
+#settingModel .settingContainer .tabData {
+  padding: 20px;
+  overflow: auto;
+}
 #home {
   height: 200px;
   color: #fff;

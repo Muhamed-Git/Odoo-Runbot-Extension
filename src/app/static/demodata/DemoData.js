@@ -26,6 +26,7 @@ const demoData = {
   Setting: {
     userName: 'Deep',
     clockType: true,
+    defaultHistoryDate: 365,
   },
   Branches: {
     'entdev+master-website-sign-qunit-test-case-dep': {
