@@ -9,6 +9,9 @@ import ChromeAPI from '../base/chrome/chrome.js'
 // App Data
 import appData from './data.js'
 
+// Components
+import Search from '../search/search.js'
+
 // Less
 require("./less/history.less");
 
@@ -23,6 +26,7 @@ class History extends React.Component {
       }
       this.onHistoryGroupClick = this.onHistoryGroupClick.bind(this);
       this.onBackClick = this.onBackClick.bind(this);
+      this.selectDateOnChange = this.selectDateOnChange.bind(this);
   }
 
   onHistoryGroupClick(event) {
@@ -48,9 +52,28 @@ class History extends React.Component {
     var self = this;
     var options = {
       text: "",
-      startTime: appData.getMilisecound(10),
+      startTime: appData.getMilisecound(1),
       maxResults: 2000
     };
+    new ChromeAPI().getHistoryGroups(options).then((historyGroups) => {
+      self.setState({
+        historyGroups: historyGroups
+      });
+    });
+
+    window.$('#selectHistoryDate').on('change',function(){
+        self.selectDateOnChange(window.$('#selectHistoryDate').val());
+    });
+  }
+
+  selectDateOnChange(days) {
+    var ms = appData.getMilisecound(parseInt(days,10));
+    var options = {
+      text: "",
+      startTime: ms,
+      maxResults: 2000
+    };
+    var self = this;
     new ChromeAPI().getHistoryGroups(options).then((historyGroups) => {
       self.setState({
         historyGroups: historyGroups
@@ -83,7 +106,7 @@ class History extends React.Component {
               </div>);
           });
           return (
-            <div>{historyGroups}</div>
+            <div className="row">{historyGroups}</div>
           )
       }
 
@@ -107,10 +130,24 @@ class History extends React.Component {
       return (
           <div className="row cardContainer">
             <div className="col s12 runbotTitle appTital">
-              History
-              <div className="right"></div>
+              <span className="tital">history</span>
+              <div className="right">
+                  <div className="selectDateDiv">
+                    <i className="fa fa-clock-o"></i>
+                    <select className="selectDate" id="selectHistoryDate">
+                      <option value="1">Yesterday</option>
+                      <option value="7">Last Week</option>
+                      <option value="14">Last 2 Weeks</option>
+                      <option value="30">Last Month</option>
+                      <option value="60">Last 2 Months</option>
+                      <option value="90">Last 3 Months</option>
+                      <option value="365">Last Year</option>
+                    </select>
+                  </div>
+              </div>
               <div className={"back " + classnames({'hide': this.state.groupsView})} onClick={this.onBackClick}><i className="fa fa-arrow-left" aria-hidden="true"></i></div>
             </div>
+            <Search />
             {
               this.state.groupsView ? <HistoryGroups groups={this.state.historyGroups} onHistoryGroupClick={this.onHistoryGroupClick}/> :
               <HistoryListView data={this.state.historyListViewData}/>

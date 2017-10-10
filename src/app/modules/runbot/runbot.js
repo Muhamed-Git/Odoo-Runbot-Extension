@@ -56,7 +56,7 @@ class Runbot extends React.Component {
              </div>
            </div>
            <div className="col s12 runbotTitle appTital">
-             odoo runbot
+             <span className="tital">odoo runbot</span>
              <div className="runbotActions right">
                <div className="center-align">
                  <a className="modal-trigger" href="#addBranchModel"><i className="fa fa-plus-circle" aria-hidden="true"></i></a>

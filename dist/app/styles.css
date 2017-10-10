@@ -74,6 +74,48 @@ body {
 nav {
   background-color: #875a7b;
 }
+.searchComponent #searchInput {
+  margin-bottom: 0;
+}
+.searchComponent .searchInputDiv {
+  position: relative;
+}
+.searchComponent .searchInputDiv .seachIcon {
+  position: absolute;
+  right: 13px;
+  bottom: 10px;
+}
+body {
+  font-size: 100%;
+}
+.brand-logo {
+  padding-left: 10px !important;
+  font-family: 'Comfortaa', cursive;
+}
+.actionbutton .parent {
+  background-color: #875a7b;
+}
+.actionbutton .child a {
+  background-color: #21b799;
+}
+nav {
+  background-color: #875a7b;
+}
+#history .appTital .selectDateDiv {
+  display: flex;
+}
+#history .appTital .selectDateDiv i {
+  font-size: 25px;
+  margin-top: 8px;
+  margin-right: 14px;
+}
+#history .appTital .selectDate {
+  width: 150px;
+}
+#history .appTital .right input {
+  margin-bottom: 2px;
+  height: 35px;
+}
 #history .back {
   z-index: 111;
   top: 70px;
@@ -583,9 +625,14 @@ nav {
   margin-left: 50px;
 }
 .appContainer .appTital {
-  font-size: 30px;
   background: #f9f9f9;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   color: #875a7b;
+}
+.appContainer .appTital .tital {
   font-family: 'Comfortaa', cursive;
+  font-size: 30px;
+}
+a.disabled {
+  pointer-events: none;
 }

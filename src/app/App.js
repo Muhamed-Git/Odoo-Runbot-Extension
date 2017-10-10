@@ -31,7 +31,9 @@ class App extends React.Component {
 
   componentDidMount() {
       this.model.getAll(this.initState);
-      window.$('.scrollspy').scrollSpy();
+      window.$('.scrollspy').scrollSpy({
+        scrollOffset: 30
+      });
   }
 
   initState(data) {
