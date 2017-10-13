@@ -27,6 +27,7 @@ const demoData = {
     userName: 'Deep',
     clockType: true,
     defaultHistoryDate: 365,
+    sortedAppList: ['runbot','history']
   },
   Branches: {
     'entdev+master-website-sign-qunit-test-case-dep': {

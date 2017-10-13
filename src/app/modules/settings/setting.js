@@ -2,6 +2,7 @@
 import React from 'react';
 import _ from 'underscore'
 import classnames from 'classnames'
+import DragSortableList from 'react-drag-sortable'
 
 // Redux
 import { connect } from 'react-redux'
@@ -21,10 +22,15 @@ class SettingAction extends React.Component {
       this.state = {
         userName: '',
         clockType: false,
+        dragAppList: [
+            {content: (<span><i className="fa fa-bars"></i>History</span>), classes:['listItem'], data:"history"},
+            {content: (<span><i className="fa fa-bars"></i>Runbot</span>), classes:['listItem'], data:"runbot"},
+        ]
       }
       this.onChangeUserName = this.onChangeUserName.bind(this);
       this.onClockTypeClick = this.onClockTypeClick.bind(this);
       this.onChangeHistoryDateSelect = this.onChangeHistoryDateSelect.bind(this);
+      this.onAppListSort = this.onAppListSort.bind(this);
       this.model = new Model('Setting');
   }
 
@@ -38,10 +44,16 @@ class SettingAction extends React.Component {
    }
 
    componentWillReceiveProps(nextProps) {
+     let dal = this.state.dragAppList;
+     let dragAppList = nextProps.store.Setting.sortedAppList.map( (l) =>
+          dal.filter( (c) => c.data === l )[0]
+     );
      this.setState({
        userName: nextProps.store.Setting.userName || '',
        clockType: nextProps.store.Setting.clockType || false,
        defaultHistoryDate: nextProps.store.Setting.defaultHistoryDate || 1,
+       sortedAppList: nextProps.store.Setting.sortedAppList || [],
+       dragAppList: dragAppList || []
      });
    }
 
@@ -62,6 +74,7 @@ class SettingAction extends React.Component {
        userName:this.state.userName,
        clockType: this.state.clockType,
        defaultHistoryDate : this.state.defaultHistoryDate,
+       sortedAppList: this.state.sortedAppList
      };
      this.model.set(data,this.props.store,(d) => {
        this.props.updateSettings(data);
@@ -76,7 +89,16 @@ class SettingAction extends React.Component {
      })
    }
 
+   onAppListSort (sortedList) {
+     let newList = sortedList.map( (l) => l.data );
+     this.setState({
+       sortedAppList: newList,
+       dragAppList: sortedList,
+     })
+   }
+
    render() {
+
       return (
          <div>
              <div id="settingModel" className="modal modal-fixed-footer">
@@ -102,6 +124,9 @@ class SettingAction extends React.Component {
                             <input type="checkbox" id="clockSelect" checked={classnames({'checked':this.state.clockType})} value={this.state.clockType}/>
                             <label htmlFor="clockSelect" onClick={this.onClockTypeClick}>24 H Clock</label>
                           </p>
+                        </li>
+                        <li className="collection-item">
+                            <DragSortableList items={this.state.dragAppList} moveTransitionDuration={0.3} onSort={this.onAppListSort} type="vertical"/>
                         </li>
                       </ul>
                     </div>

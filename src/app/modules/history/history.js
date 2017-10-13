@@ -151,7 +151,7 @@ class History extends React.Component {
               <div className="right">
                   <div className="selectDateDiv">
                     <i className="fa fa-clock-o"></i>
-                    <select class="browser-default selectDate" id="selectHistoryDate" value={this.state.defaultHistoryDate} onChange={this.selectDateOnChange}>
+                    <select className="browser-default selectDate" id="selectHistoryDate" value={this.state.defaultHistoryDate} onChange={this.selectDateOnChange}>
                       <option value="1">Yesterday</option>
                       <option value="7">Last Week</option>
                       <option value="14">Last 2 Weeks</option>

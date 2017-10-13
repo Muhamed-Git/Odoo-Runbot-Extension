@@ -76,6 +76,18 @@ nav {
   padding: 20px;
   overflow: auto;
 }
+#settingModel .settingContainer .List .listItem {
+  font-size: 17px;
+  padding: 5px;
+  background-color: #f9f9f9;
+  margin: 5px;
+}
+#settingModel .settingContainer .List .listItem i {
+  margin-right: 10px;
+  font-size: 14px;
+  color: #C0C0C0;
+  cursor: move;
+}
 #home {
   height: 200px;
   color: #fff;
@@ -637,6 +649,8 @@ nav {
   background-color: #875a7b;
 }
 .side-nav {
+  display: flex;
+  flex-direction: column;
   width: 50px;
   background-color: #875a7b;
 }
@@ -662,6 +676,8 @@ nav {
   font-weight: 800;
 }
 .appContainer {
+  display: flex;
+  flex-direction: column;
   margin-left: 50px;
 }
 .appContainer .appTital {
