@@ -19,19 +19,39 @@ class SettingAction extends React.Component {
 
   constructor(props) {
       super(props);
-      this.state = {
-        userName: '',
-        clockType: false,
-        dragAppList: [
-            {content: (<span><i className="fa fa-bars"></i>History</span>), classes:['listItem'], data:"history"},
-            {content: (<span><i className="fa fa-bars"></i>Runbot</span>), classes:['listItem'], data:"runbot"},
-        ]
-      }
       this.onChangeUserName = this.onChangeUserName.bind(this);
       this.onClockTypeClick = this.onClockTypeClick.bind(this);
       this.onChangeHistoryDateSelect = this.onChangeHistoryDateSelect.bind(this);
       this.onAppListSort = this.onAppListSort.bind(this);
       this.model = new Model('Setting');
+      this.onClickAppDisable = this.onClickAppDisable.bind(this);
+
+      this.state = {
+        userName: '',
+        clockType: false,
+        disabledApp: {},
+        dragAppList: [
+            {content: (<div>
+              <i className="fa fa-bars"></i>
+              History
+              <div className="right">
+                <i className="fa fa-ban" data-appname="history" onClick={this.onClickAppDisable}></i>
+              </div>
+            </div>), classes:['listItem'], data:"history"},
+            {content: (<div>
+              <i className="fa fa-bars"></i>
+              Runbot
+              <div className="right">
+                <i className="fa fa-ban" data-appname="runbot" onClick={this.onClickAppDisable}></i>
+              </div>
+            </div>), classes:['listItem'], data:"runbot"},
+        ]
+      }
+  }
+
+  onClickAppDisable (event) {
+    var appname = event.target.dataset.appname;
+    this.state.disabledApp[appname] = !this.state.disabledApp[appname]
   }
 
    componentDidMount() {
@@ -53,7 +73,8 @@ class SettingAction extends React.Component {
        clockType: nextProps.store.Setting.clockType || false,
        defaultHistoryDate: nextProps.store.Setting.defaultHistoryDate || 1,
        sortedAppList: nextProps.store.Setting.sortedAppList || [],
-       dragAppList: dragAppList || []
+       dragAppList: dragAppList || [],
+       disabledApp: nextProps.store.Setting.disabledApp || {},
      });
    }
 
@@ -74,7 +95,8 @@ class SettingAction extends React.Component {
        userName:this.state.userName,
        clockType: this.state.clockType,
        defaultHistoryDate : this.state.defaultHistoryDate,
-       sortedAppList: this.state.sortedAppList
+       sortedAppList: this.state.sortedAppList,
+       disabledApp: this.state.disabledApp,
      };
      this.model.set(data,this.props.store,(d) => {
        this.props.updateSettings(data);

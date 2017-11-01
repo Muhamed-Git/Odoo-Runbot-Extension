@@ -88,6 +88,10 @@ nav {
   color: #C0C0C0;
   cursor: move;
 }
+#settingModel .settingContainer .List .listItem .right i {
+  color: #dc6965;
+  cursor: pointer;
+}
 #home {
   height: 200px;
   color: #fff;

@@ -1,6 +1,7 @@
 // Library
 import React from 'react'
 import _ from 'underscore'
+import classnames from 'classnames'
 
 // Redux
 import { connect } from 'react-redux'
@@ -33,6 +34,11 @@ class App extends React.Component {
           runbot: 3,
           history: 2,
           home:1
+        },
+        disabledApp: {
+          runbot: false,
+          history: false,
+          home: false,
         }
       }
   }
@@ -51,12 +57,14 @@ class App extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     let settings = nextProps.store.Setting;
-    let sortedAppList = settings.sortedAppList
+    let sortedAppList = settings.sortedAppList;
+    let disabledApp = settings.disabledApp || this.state.disabledApp;
     sortedAppList.map( (al,index) => {
       this.state.orderAppList[al] = index+1
     });
     this.setState({
-      orderAppList: this.state.orderAppList
+      orderAppList: this.state.orderAppList,
+      disabledApp: disabledApp,
     })
   }
 
@@ -70,12 +78,12 @@ class App extends React.Component {
                  <i className="fa fa-home" aria-hidden="true"></i>
                </a>
              </li>
-             <li style={{'order' : this.state.orderAppList.history}}>
+             <li style={{'order' : this.state.orderAppList.history}} className={classnames({'hide':this.state.disabledApp.history})}>
                <a href="#history">
                  <i className="fa fa-history" aria-hidden="true"></i>
                </a>
              </li>
-             <li style={{'order' : this.state.orderAppList.runbot}}>
+             <li style={{'order' : this.state.orderAppList.runbot}} className={classnames({'hide':this.state.disabledApp.runbot})}>
                <a href="#runbot">
                  <i className="fa fa-circle-o odoo" aria-hidden="true"></i>
                </a>
@@ -87,11 +95,11 @@ class App extends React.Component {
                <Home />
              </div>
 
-             <div id="history" className="section scrollspy" style={{'order' : this.state.orderAppList.history}}>
+             <div id="history" className={"section scrollspy " + classnames({'hide':this.state.disabledApp.history})} style={{'order' : this.state.orderAppList.history}}>
                <History />
              </div>
 
-             <div id="runbot" className="section scrollspy" style={{'order' : this.state.orderAppList.runbot}}>
+             <div id="runbot"  className={"section scrollspy " + classnames({'hide':this.state.disabledApp.runbot})} style={{'order' : this.state.orderAppList.runbot}}>
                  <Runbot />
              </div>
            </div>
